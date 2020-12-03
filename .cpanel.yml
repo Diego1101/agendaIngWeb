@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/czligs/public_html/deployTest/
+    - /bin/cp index.html $DEPLOYPATH
