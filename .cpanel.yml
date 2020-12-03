@@ -1,5 +1,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/czligs/public_html/deployTest/
+    - export DEPLOYPATH=/home/onegocom/public_html/agendaIngWeb
     - /bin/cp index.html $DEPLOYPATH
