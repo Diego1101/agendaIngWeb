@@ -1,43 +1,47 @@
-<?php  
+<?php
 
-switch($_REQUEST['op']) {
-    case 'rol':
-        echo $_REQUEST['op'];
-    break;
-
-    case 'carrera':
-        echo $_REQUEST['op'];
-    break;
-
-    case 'semestre':
-        echo $_REQUEST['op'];
-    break;
-
-    case 'grupo':
-        echo $_REQUEST['op'];
-    break;
-
-    default:
-        echo 'Ninguno';
-    break;
+if(isset($_REQUEST['op'])) {
+    switch($_REQUEST['op']) {
+        case 'rol':
+            listarCatalogo('SELECT ROL_CVE ID, ROL_NOM NOMBRE FROM ROL ORDER BY ROL_CVE');
+        break;
+    
+        case 'carrera':
+            listarCatalogo('SELECT CAR_CVE ID, CAR_NOM NOMBRE FROM CARRERA ORDER BY CAR_CVE');
+        break;
+    
+        case 'semestre':
+            listarCatalogo('SELECT SEM_CVE ID, SEM_NOM NOMBRE FROM SEMESTRE ORDER BY SEM_CVE');
+        break;
+    
+        case 'grupo':
+            listarCatalogo('SELECT GRU_CVE ID, GRU_NOM NOMBRE FROM GRUPO ORDER BY GRU_CVE');
+        break;
+    
+        default:
+        http_response_code(400);
+        echo json_encode([400, 'Bad Request']);
+        break;
+    }
+}
+else {
+    http_response_code(400);
+    echo json_encode([400, 'Bad Request']);
 }
 
-// $datos = array();
-// include_once 'conection.php';
-// if ($conn = mysqli_connect($server, $dbuser, $dbpass, $bd)) {
-//     $renglon = mysqli_query($conn, "SELECT ID, SE_SERVICIO SERVICIO, SE_TIPO TIPO, SE_DESCR DESCR, SE_COSTO COSTO, SE_DESC DESCU, SE_FECHA FECHA, SE_CONF CONF FROM SERVICIOS WHERE SE_CONF=" . $tipo);
-//     $i=0;
-//     while ($resultado = mysqli_fetch_assoc($renglon)) {
-//         $datos[0]["ID"][$i] = $resultado["ID"];
-//         $datos[1]["SERVICIO"][$i] = $resultado["SERVICIO"];
-//         $datos[2]["TIPO"][$i] = $resultado["TIPO"];
-//         $datos[3]["DESCR"][$i] = $resultado["DESCR"];
-//         $datos[4]["COSTO"][$i] = $resultado["COSTO"];
-//         $datos[5]["DESCU"][$i] = $resultado["DESCU"];
-//         $datos[6]["FECHA"][$i] = $resultado["FECHA"];
-//         $datos[7]["CONF"][$i] = $resultado["CONF"];
-//         $i=$i+1;
-//     }
-//     mysqli_close($conn);
-// }
-// return $datos;
+function listarCatalogo($query) {
+    $datos = array();
+    include_once 'conexion.php';
+    if ($conn = mysqli_connect($server, $dbuser, $dbpass, $bd)) {
+        $renglon = mysqli_query($conn, $query);
+        $i=0;
+        while ($resultado = mysqli_fetch_assoc($renglon)) {
+            $datos[$i]["ID"] = htmlspecialchars($resultado["ID"]);
+            $datos[$i]["NOMBRE"] = utf8_encode($resultado["NOMBRE"]);
+            $i=$i+1;
+        }
+        mysqli_close($conn);
+    }
+    echo json_encode($datos, JSON_UNESCAPED_UNICODE);
+}
+

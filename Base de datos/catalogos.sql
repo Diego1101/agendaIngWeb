@@ -9,7 +9,7 @@ INSERT INTO CARRERA VALUES(null, 'Ingeniería Cibernética', '');
 
 INSERT INTO SEMESTRE VALUES(null, 'Primer semestre', '');
 INSERT INTO SEMESTRE VALUES(null, 'Segundo semestre', '');
-INSERT INTO SEMESTRE VALUES(null, 'Tercero semestre', '');
+INSERT INTO SEMESTRE VALUES(null, 'Tercer semestre', '');
 INSERT INTO SEMESTRE VALUES(null, 'Cuarto semestre', '');
 INSERT INTO SEMESTRE VALUES(null, 'Quinto semestre', '');
 INSERT INTO SEMESTRE VALUES(null, 'Sexto semestre', '');
