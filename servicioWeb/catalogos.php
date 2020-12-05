@@ -7,15 +7,15 @@ if(isset($_REQUEST['op'])) {
         break;
     
         case 'carrera':
-            listarCatalogo('SELECT CAR_CVE ID, CAR_NOM NOMBRE FROM CARRERA ORDER BY CAR_CVE');
+            listarCatalogo('SELECT CAR_CVE ID, CAR_NOM NOMBRE FROM CARRERA WHERE CAR_STA=1 ORDER BY CAR_CVE');
         break;
     
         case 'semestre':
-            listarCatalogo('SELECT SEM_CVE ID, SEM_NOM NOMBRE FROM SEMESTRE ORDER BY SEM_CVE');
+            listarCatalogo('SELECT SEM_CVE ID, SEM_NOM NOMBRE FROM SEMESTRE WHERE SEM_STA=1 ORDER BY SEM_CVE');
         break;
     
         case 'grupo':
-            listarCatalogo('SELECT GRU_CVE ID, GRU_NOM NOMBRE FROM GRUPO ORDER BY GRU_CVE');
+            listarCatalogo('SELECT GRU_CVE ID, GRU_NOM NOMBRE FROM GRUPO WHERE GRU_STA=1 ORDER BY GRU_CVE');
         break;
     
         default:
