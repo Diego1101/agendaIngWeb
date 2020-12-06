@@ -1,5 +1,5 @@
 <?php
-
+header('Content-Type: application/json');
 if(isset($_REQUEST['op'])) {
     switch($_REQUEST['op']) {
         case 'rol':

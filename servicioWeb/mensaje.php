@@ -1,5 +1,5 @@
 <?php
-
+header('Content-Type: application/json');
 if(isset($_REQUEST['op'])) {
     switch($_REQUEST['op']) {
         case 'listar':
@@ -54,15 +54,34 @@ function crearMensaje() {
 
 function listarMensajes() {
     if(isset($_REQUEST['id'])) {
+        $usuarios = obtenerUsuarios();
+        
         $datos = array();
-        include_once 'conexion.php';
+        $id = $_REQUEST['id'];
+        include 'conexion.php';
         if ($conn = mysqli_connect($server, $dbuser, $dbpass, $bd)) {
-            $renglon = mysqli_query($conn, 'SELECT * FROM TRANSACCION, MENSAJE WHERE');
-            $i=0;
+            $renglon = mysqli_query($conn, "SELECT MEN_CVE ID, MEN_REM REMITENTE, MEN_NOM MENSAJE, TRA_DES DESTINATARIO, MEN_FECHA FECHA FROM MENSAJE, TRANSACCION WHERE MEN_STA=1 AND MEN_REM=$id AND TRA_MEN=MEN_CVE
+            UNION
+            SELECT MEN_CVE ID, MEN_REM REMITENTE, MEN_NOM MENSAJE, TRA_DES DESTINATARIO, MEN_FECHA FECHA FROM MENSAJE, TRANSACCION WHERE MEN_STA=1 AND TRA_MEN=MEN_CVE AND TRA_DES=$id ORDER BY ID, FECHA");
+            
+            $i = -1;
             while ($resultado = mysqli_fetch_assoc($renglon)) {
-                $datos[$i]["ID"] = htmlspecialchars($resultado["ID"]);
-                $datos[$i]["NOMBRE"] = utf8_encode($resultado["NOMBRE"]);
-                $i=$i+1;
+                if($i<0 || $datos[$i]["ID"] != $resultado["ID"]) {
+                    $i=$i+1;
+                    $datos[$i]["ID"] = $resultado["ID"];
+                    $datos[$i]["MENSAJE"] = utf8_encode($resultado["MENSAJE"]);
+                    $datos[$i]["FECHA"] = $resultado["FECHA"];
+                    $datos[$i]["TIPO"] = '';
+                    $datos[$i]["REMITENTE"] = $usuarios[$resultado["REMITENTE"]];
+                    
+                    $datos[$i]["DESTINATARIOS"] = array();
+                }
+
+                if ($resultado["REMITENTE"] == $id) {
+                    $datos[$i]["TIPO"] = 'Enviado'; 
+                    array_push($datos[$i]["DESTINATARIOS"], $usuarios[$resultado["DESTINATARIO"]]);
+                }
+                else $datos[$i]["TIPO"] = 'Recibido'; 
             }
             mysqli_close($conn);
         }
@@ -72,5 +91,20 @@ function listarMensajes() {
         http_response_code(400);
         echo json_encode([400, 'Bad Request']);
     }
+}
+
+function obtenerUsuarios() {
+    $users = array();
+    include 'conexion.php';
+    if ($conn = mysqli_connect($server, $dbuser, $dbpass, $bd)) {
+        $renglon = mysqli_query($conn, "SELECT * FROM USUARIO ORDER BY USU_CVE");
+        while ($resultado = mysqli_fetch_assoc($renglon)) {
+            $users[$resultado["USU_CVE"]]["Id"] = utf8_encode($resultado["USU_CVE"]);
+            $users[$resultado["USU_CVE"]]["Nombre"] = utf8_encode($resultado["USU_NOM"]);
+            $users[$resultado["USU_CVE"]]["Apellido"] =utf8_encode( $resultado["USU_AP"]);
+        }
+        mysqli_close($conn);
+    }
+    return $users;
 }
 
