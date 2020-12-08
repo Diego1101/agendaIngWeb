@@ -110,11 +110,11 @@ header('Content-Type: application/json');
                     WHERE A.USU_ROL=B.ROL_CVE;");
                     $i=0;
                     while ($resultado=mysqli_fetch_assoc($renglon)) {
-                        $datos[$i]["ID"]=$resultado['ID'];
-                        $datos[$i]["NOMBRE"]=$resultado['NOMBRE'];
-                        $datos[$i]["ROL"] = $resultado['ROL'];
-                        $datos[$i]["TELEFONO"] = $resultado['TEL'];
-                        $datos[$i]["EMAIL"] = $resultado['EMAIL'];
+                        $datos[$i]["ID"]= utf8_encode($resultado['ID']);
+                        $datos[$i]["NOMBRE"]= utf8_encode($resultado['NOMBRE']);
+                        $datos[$i]["ROL"] = utf8_encode($resultado['ROL']);
+                        $datos[$i]["TELEFONO"] = utf8_encode($resultado['TEL']);
+                        $datos[$i]["EMAIL"] = utf8_encode($resultado['EMAIL']);
                         $i++;
                     }
                     mysqli_close($conn);
