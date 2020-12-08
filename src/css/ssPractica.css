@@ -1,0 +1,29 @@
+*{
+    background:none;
+    font-family: sans-serif Tahoma;
+}
+
+body{
+    background:#212121; !important
+}
+
+.header{
+    background:#111540;
+    padding: 15px;
+}
+
+footer{
+    padding:15px;
+    background:#115;
+}
+
+img{
+    width:100%;
+    height:100%;
+}
+
+
+button img{
+    height:350px;
+    width: auto;
+}
