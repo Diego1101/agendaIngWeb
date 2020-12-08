@@ -2,5 +2,5 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/onegocom/public_html/agendaIng/
-    - /bin/cp index.html $DEPLOYPATH
     - /bin/cp -R servicioWeb $DEPLOYPATH
+    - /bin/cp -R src/ $DEPLOYPATH
