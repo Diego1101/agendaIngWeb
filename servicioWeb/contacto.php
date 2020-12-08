@@ -126,7 +126,7 @@
                 $id = ($_REQUEST['id']);
                 include_once 'conexion.php';
                 if ($conn = mysqli_connect($server, $dbuser, $dbpass, $bd)) {
-                    $renglon = mysqli_query($conn, "SELECT A.USU_CVE ID, CONCAT(A.USU_NOM,' ',A.USU_AP) NOMBRE, B.ROL_DES ROL, A.USU_ROL USUROL, A.USU_TEL TEL, A.USU_EMAIL EMAIL, A.USU_USUARIO USUARIO 
+                    $renglon = mysqli_query($conn, "SELECT A.USU_CVE ID, CONCAT(A.USU_NOM,' ',A.USU_AP) NOMBRE, B.ROL_DES ROL, A.USU_ROL USUROL, A.USU_TEL TEL, A.USU_EMAIL EMAIL, A.USU_USUARIO USUARIO, A.USU_CAR CARRERA, A.USU_SEM SEMESTRE, A.USU_GRU GRUPO 
                     FROM USUARIO A, ROL B 
                     WHERE A.USU_ROL=B.ROL_CVE
                     AND USU_CVE=".$id);
@@ -137,7 +137,11 @@
                         $datos["USUARIO"] = $resultado['USUARIO'];
                         $datos["TELEFONO"] = $resultado['TEL'];
                         $datos["EMAIL"] = $resultado['EMAIL'];
+                        $datos["CARRERA"] = $resultado['CARRERA'];
+                        $datos["SEMESTRE"] = $resultado['SEMESTRE'];
+                        $datos["GRUPO"] = $resultado['GRUPO'];
                     }
+                    mysqli_close($conn);
                 }
                 echo json_encode($datos);
             }
