@@ -29,6 +29,7 @@ else {
     echo json_encode([400, 'Bad Request']);
 }
 
+
 function listarCatalogo($query) {
     $datos = array();
     include_once 'conexion.php';
