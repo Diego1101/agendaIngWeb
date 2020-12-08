@@ -119,7 +119,7 @@ header('Content-Type: application/json');
                     }
                     mysqli_close($conn);
                 }
-                echo json_encode($datos);
+                echo json_encode($datos, JSON_UNESCAPED_UNICODE);
             break;
             case 'buscar':
             break;
