@@ -58,9 +58,9 @@ header('Content-Type: application/json');
                         }
                         mysqli_close($conn);
                     }
-                    if((int)$datos["ID"]!=0){
+                    //if((int)$datos["ID"]!=0){
                         echo json_encode($datos);
-                    }
+                    //}
                 }
             break;
             case 'modificar':
