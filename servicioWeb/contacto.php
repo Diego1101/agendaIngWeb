@@ -91,6 +91,7 @@
                 include_once 'conexion.php';
                 if ($conn = mysqli_connect($server, $dbuser, $dbpass, $bd)) {
                     $renglon = mysqli_query($conn, "CALL  tspBajaC('$id');");
+                    //$renglon = mysqli_query($conn, "DELETE FROM USUARIO WHERE USU_CVE=$id;");
                     while ($resultado = mysqli_fetch_assoc($renglon)) {
                         $datos= $resultado['BAJA'];
                     }
@@ -125,18 +126,20 @@
                 $id = ($_REQUEST['id']);
                 include_once 'conexion.php';
                 if ($conn = mysqli_connect($server, $dbuser, $dbpass, $bd)) {
-                    $renglon = mysqli_query($conn, "SELECT * FROM USUARIO WHERE USU_CVE=".$id);
+                    $renglon = mysqli_query($conn, "SELECT A.USU_CVE ID, CONCAT(A.USU_NOM,' ',A.USU_AP) NOMBRE, B.ROL_DES ROL, A.USU_ROL USUROL, A.USU_TEL TEL, A.USU_EMAIL EMAIL, A.USU_USUARIO USUARIO 
+                    FROM USUARIO A, ROL B 
+                    WHERE A.USU_ROL=B.ROL_CVE
+                    AND USU_CVE=".$id);
                     while ($resultado = mysqli_fetch_assoc($renglon)) {
-
+                        $datos["ID"]=$resultado['ID'];
+                        $datos["NOMBRE"]=$resultado['NOMBRE'];
+                        $datos["ROL"] = $resultado['ROL'];
+                        $datos["USUARIO"] = $resultado['USUARIO'];
+                        $datos["TELEFONO"] = $resultado['TEL'];
+                        $datos["EMAIL"] = $resultado['EMAIL'];
                     }
-        }
-            
-                $datos = $cliente->detalle($_REQUEST['id']);
+                }
                 echo json_encode($datos);
-            }
-            else {
-                http_response_code(204);
-                echo json_encode(204);
             }
         break;
         default:
