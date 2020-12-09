@@ -32,14 +32,14 @@ header('Content-Type: application/json');
                         while ($resultado = mysqli_fetch_assoc($renglon)) {
                             $datos["ID"]=$resultado['CLAVE'];
                             if((int)$datos["ID"]!=0){
-                                $datos["NOMBRE"]=$resultado['NOMBRE'];
+                                $datos["NOMBRE"]= utf8_encode($resultado['NOMBRE']);
                             }else{
                                     $datos["ID"]=0;
                             }
                         }
                         mysqli_close($conn);
                     }
-                    echo json_encode($datos);
+                    echo json_encode($datos, JSON_UNESCAPED_UNICODE);
                 }
             break;
             case 'acceso':
@@ -52,15 +52,15 @@ header('Content-Type: application/json');
                         while ($resultado = mysqli_fetch_assoc($renglon)) {
                             $datos["ID"] = $resultado['CLAVE'];
                             if ((int) $datos["ID"] != 0) {
-                                $datos["NOMBRE"] = $resultado['NOMBRE'];
-                                $datos["ROL"] = $resultado['ROL'];
+                                $datos["NOMBRE"] = utf8_encode($resultado['NOMBRE']);
+                                $datos["ROL"] = utf8_encode($resultado['ROL']);
                             }
                         }
                         mysqli_close($conn);
                     }
-                    //if((int)$datos["ID"]!=0){
-                        echo json_encode($datos);
-                    //}
+                    if((int)$datos["ID"]!=0){
+                        echo json_encode($datos, JSON_UNESCAPED_UNICODE);
+                    }
                 }
             break;
             case 'modificar':
@@ -79,12 +79,12 @@ header('Content-Type: application/json');
                     if ($conn = mysqli_connect($server, $dbuser, $dbpass, $bd)) {
                         $renglon = mysqli_query($conn, "CALL tspModConta($id, '$nom', '$ap', '$contra', '$tel', '$email', '$carrera', '$grupo', '$semestre');");
                         while ($resultado = mysqli_fetch_assoc($renglon)) {
-                            $datos["ID"] = $resultado['CLAVE'];
-                            $datos["NOMBRE"] = $resultado['NOMBRE'];
+                            $datos["ID"] = utf8_encode($resultado['CLAVE']);
+                            $datos["NOMBRE"] = utf8_encode($resultado['NOMBRE']);
                         }
                         mysqli_close($conn);
                     }
-                    echo json_encode($datos);
+                    echo json_encode($datos, JSON_UNESCAPED_UNICODE);
                 }
             break;
             case 'eliminar':
@@ -95,11 +95,11 @@ header('Content-Type: application/json');
                         $renglon = mysqli_query($conn, "CALL  tspBajaC('$id');");
                         //$renglon = mysqli_query($conn, "DELETE FROM USUARIO WHERE USU_CVE=$id;");
                         while ($resultado = mysqli_fetch_assoc($renglon)) {
-                            $datos= $resultado['BAJA'];
+                            $datos= utf8_encode($resultado['BAJA']);
                         }
                         mysqli_close($conn);
                     }
-                    echo json_encode($datos);
+                    echo json_encode($datos, JSON_UNESCAPED_UNICODE);
                 }
             break;
             case 'listar':
@@ -133,19 +133,19 @@ header('Content-Type: application/json');
                         WHERE A.USU_ROL=B.ROL_CVE
                         AND USU_CVE=".$id);
                         while ($resultado = mysqli_fetch_assoc($renglon)) {
-                            $datos["ID"]=$resultado['ID'];
-                            $datos["NOMBRE"]=$resultado['NOMBRE'];
-                            $datos["ROL"] = $resultado['ROL'];
-                            $datos["USUARIO"] = $resultado['USUARIO'];
-                            $datos["TELEFONO"] = $resultado['TEL'];
-                            $datos["EMAIL"] = $resultado['EMAIL'];
-                            $datos["CARRERA"] = $resultado['CARRERA'];
-                            $datos["SEMESTRE"] = $resultado['SEMESTRE'];
-                            $datos["GRUPO"] = $resultado['GRUPO'];
+                            $datos["ID"]=utf8_encode($resultado['ID']);
+                            $datos["NOMBRE"]= utf8_encode($resultado['NOMBRE']);
+                            $datos["ROL"] = utf8_encode($resultado['ROL']);
+                            $datos["USUARIO"] = utf8_encode($resultado['USUARIO']);
+                            $datos["TELEFONO"] = utf8_encode($resultado['TEL']);
+                            $datos["EMAIL"] = utf8_encode($resultado['EMAIL']);
+                            $datos["CARRERA"] = utf8_encode($resultado['CARRERA']);
+                            $datos["SEMESTRE"] = utf8_encode($resultado['SEMESTRE']);
+                            $datos["GRUPO"] = utf8_encode($resultado['GRUPO']);
                         }
                         mysqli_close($conn);
                     }
-                    echo json_encode($datos);
+                    echo json_encode($datos, JSON_UNESCAPED_UNICODE);
                 }
             break;
             default:
