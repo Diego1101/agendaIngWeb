@@ -77,7 +77,7 @@ header('Content-Type: application/json');
                     if (isset($_REQUEST['semestre'])) $semestre = $_REQUEST['semestre'];
                     include_once 'conexion.php';
                     if ($conn = mysqli_connect($server, $dbuser, $dbpass, $bd)) {
-                        $renglon = mysqli_query($conn, "CALL tspModConta($id, '$nom', '$ap', '$contra', '$tel', '$email', '$carrera', '$grupo', '$semestre');");
+                        $renglon = mysqli_query($conn, "CALL tspModConta($id, '$nom', '$ap', '$contra', '$tel', '$email', '$carrera', '$semestre', '$grupo');");
                         while ($resultado = mysqli_fetch_assoc($renglon)) {
                             $datos["ID"] = utf8_encode($resultado['CLAVE']);
                             $datos["NOMBRE"] = utf8_encode($resultado['NOMBRE']);
