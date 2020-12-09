@@ -44,6 +44,10 @@ CREATE TABLE MENSAJE (
     MEN_NOM                 VARCHAR(500) NOT NULL,
     MEN_REM		   			INT NOT NULL,
     MEN_FECHA               DATETIME,
+    MEN_CAR					INT,
+	MEN_SEM					INT,
+	MEN_GRU					INT,
+    MEN_TIPO    			INT,
 	MEN_STA					INT NOT NULL
 )ENGINE =InnOdb DEFAULT CHARSET=utf8;
 

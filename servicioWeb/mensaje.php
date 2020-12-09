@@ -30,14 +30,16 @@ function crearMensaje() {
         $carrera = -1;
         $grupo = -1;
         $semestre = -1;
+        $dest = -1;
         if (isset($_REQUEST['rol'])) $rol = $_REQUEST['rol'];
         if (isset($_REQUEST['carrera'])) $carrera = $_REQUEST['carrera'];
         if (isset($_REQUEST['grupo'])) $grupo = $_REQUEST['grupo'];
         if (isset($_REQUEST['semestre'])) $semestre = $_REQUEST['semestre'];
+        if (isset($_REQUEST['us'])) $dest = $_REQUEST['us'];
 
         include_once 'conexion.php';
         if ($conn = mysqli_connect($server, $dbuser, $dbpass, $bd)) {
-            $renglon = mysqli_query($conn, "CALL stpNuevoMensaje('$mensaje', $id, $rol, $carrera, $grupo, $semestre)");
+            $renglon = mysqli_query($conn, "CALL stpNuevoMensaje('$mensaje', $id, $rol, $carrera, $grupo, $semestre, $dest)");
             while ($resultado = mysqli_fetch_assoc($renglon)) {
                 $datos["RES"] = $resultado['RES'];
             }
@@ -58,18 +60,34 @@ function listarMensajes() {
         
         $datos = array();
         $id = $_REQUEST['id'];
+
+        $rol = '';
+        $carrera = '';
+        $grupo = '';
+        $semestre = '';
+        if (isset($_REQUEST['rol'])) $rol = $_REQUEST['rol'];
+        if (isset($_REQUEST['carrera'])) $carrera = $_REQUEST['carrera'];
+        if (isset($_REQUEST['grupo'])) $grupo = $_REQUEST['grupo'];
+        if (isset($_REQUEST['semestre'])) $semestre = $_REQUEST['semestre'];
+
+
         include 'conexion.php';
         if ($conn = mysqli_connect($server, $dbuser, $dbpass, $bd)) {
-            $renglon = mysqli_query($conn, "SELECT MEN_CVE ID, MEN_REM REMITENTE, MEN_NOM MENSAJE, TRA_DES DESTINATARIO, MEN_FECHA FECHA FROM MENSAJE, TRANSACCION WHERE MEN_STA=1 AND MEN_REM=$id AND TRA_MEN=MEN_CVE
+            $renglon = mysqli_query($conn, "SELECT MEN_CVE ID, MEN_REM REMITENTE, MEN_NOM MENSAJE, TRA_DES DESTINATARIO, MEN_FECHA FECHA, MEN_CAR CARRERA, MEN_SEM SEMESTRE, MEN_GRU GRUPO, MEN_TIPO ROL FROM MENSAJE, TRANSACCION WHERE MEN_STA=1 AND MEN_REM=$id AND TRA_MEN=MEN_CVE AND MEN_CAR LIKE '$carrera%' AND MEN_SEM LIKE '$semestre%' AND MEN_GRU LIKE '$grupo%' AND MEN_TIPO LIKE '$rol%'
             UNION
-            SELECT MEN_CVE ID, MEN_REM REMITENTE, MEN_NOM MENSAJE, TRA_DES DESTINATARIO, MEN_FECHA FECHA FROM MENSAJE, TRANSACCION WHERE MEN_STA=1 AND TRA_MEN=MEN_CVE AND TRA_DES=$id ORDER BY ID, FECHA");
-            
+            SELECT MEN_CVE ID, MEN_REM REMITENTE, MEN_NOM MENSAJE, TRA_DES DESTINATARIO, MEN_FECHA FECHA, MEN_CAR CARRERA, MEN_SEM SEMESTRE, MEN_GRU GRUPO, MEN_TIPO ROL FROM MENSAJE, TRANSACCION WHERE MEN_STA=1 AND TRA_MEN=MEN_CVE AND TRA_DES=$id AND MEN_CAR LIKE '$carrera%' AND MEN_SEM LIKE '$semestre%' AND MEN_GRU LIKE '$grupo%' AND MEN_TIPO LIKE '$rol%'");
             $i = -1;
             while ($resultado = mysqli_fetch_assoc($renglon)) {
                 if($i<0 || $datos[$i]["ID"] != $resultado["ID"]) {
                     $i=$i+1;
                     $datos[$i]["ID"] = $resultado["ID"];
                     $datos[$i]["MENSAJE"] = utf8_encode($resultado["MENSAJE"]);
+                    
+                    $datos[$i]["CARRERA"] = $resultado["CARRERA"];
+                    $datos[$i]["SEMESTRE"] = $resultado["SEMESTRE"];
+                    $datos[$i]["GRUPO"] = $resultado["GRUPO"];
+                    $datos[$i]["ROL"] = $resultado["ROL"];
+
                     $datos[$i]["FECHA"] = $resultado["FECHA"];
                     $datos[$i]["TIPO"] = '';
                     $datos[$i]["REMITENTE"] = $usuarios[$resultado["REMITENTE"]];
