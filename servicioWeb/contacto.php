@@ -28,7 +28,7 @@ header('Content-Type: application/json');
                     if (isset($_REQUEST['semestre'])) $semestre = $_REQUEST['semestre'];
                     include_once 'conexion.php';
                     if ($conn = mysqli_connect($server, $dbuser, $dbpass, $bd)) {
-                        $renglon = mysqli_query($conn, "CALL tspRegistrarC('$nom','$ap','$usu','$contra','$tel','$email','$rol', '$correo');");
+                        $renglon = mysqli_query($conn, "CALL tspRegistrarC('$nom','$ap','$usu','$contra','$tel','$email','$rol','$carrera','$grupo','$semestre');");
                         while ($resultado = mysqli_fetch_assoc($renglon)) {
                             $datos["ID"]=$resultado['CLAVE'];
                             if((int)$datos["ID"]!=0){
