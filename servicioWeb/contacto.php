@@ -122,6 +122,30 @@ header('Content-Type: application/json');
                 echo json_encode($datos, JSON_UNESCAPED_UNICODE);
             break;
             case 'buscar':
+                if (isset($_REQUEST['rol'])) $rol = $_REQUEST['rol'];
+                if (isset($_REQUEST['carrera'])) $carrera = $_REQUEST['carrera'];
+                if (isset($_REQUEST['grupo'])) $grupo = $_REQUEST['grupo'];
+                if (isset($_REQUEST['semestre'])) $semestre = $_REQUEST['semestre'];
+                include 'conexion.php';
+                if ($conn = mysqli_connect($server, $dbuser, $dbpass, $bd)) {
+                    $renglon = mysqli_query($conn, "SELECT A.USU_CVE ID, CONCAT(A.USU_NOM,' ',A.USU_AP) NOMBRE, B.ROL_DES ROL, A.USU_ROL USUROL, A.USU_TEL TEL, A.USU_EMAIL EMAIL, C.CAR_NOM CARRERA, S.SEM_NOM	SEMESTRE, G.GRU_NOM GRUPO FROM USUARIO A, ROL B, CARRERA C, SEMESTRE S, GRUPO G 
+                    WHERE A.USU_ROL=B.ROL_CVE AND A.USU_CAR = C.CAR_CVE AND A.USU_SEM = S.SEM_CVE AND A.USU_GRU = G.GRU_CVE AND A.USU_CAR LIKE '$carrera%' AND A.USU_SEM LIKE '$semestre%' AND A.USU_GRU LIKE '$grupo%' AND A.USU_ROL LIKE '$rol%';");
+                    
+                    $i = 0;
+                    while ($resultado = mysqli_fetch_assoc($renglon)) {
+                        $datos[$i]["ID"]= utf8_encode($resultado['ID']);
+                        $datos[$i]["NOMBRE"]= utf8_encode($resultado['NOMBRE']);
+                        $datos[$i]["ROL"] = utf8_encode($resultado['ROL']);
+                        $datos[$i]["TELEFONO"] = utf8_encode($resultado['TEL']);
+                        $datos[$i]["EMAIL"] = utf8_encode($resultado['EMAIL']);
+                        $datos[$i]["CARRERA"] = utf8_encode($resultado['CARRERA']);
+                        $datos[$i]["SEMESTRE"] = utf8_encode($resultado['SEMESTRE']);
+                        $datos[$i]["GRUPO"] = utf8_encode($resultado['GRUPO']);
+                        $i++;
+                    }
+                    mysqli_close($conn);
+                }
+                echo json_encode($datos, JSON_UNESCAPED_UNICODE);
             break;
             case 'detalle':
                 if (!empty($_REQUEST['id'])) {
@@ -149,6 +173,8 @@ header('Content-Type: application/json');
                 }
             break;
             default:
+                http_response_code(400);
+                echo json_encode([400, 'Bad Request']);
             break;
         }
     }
