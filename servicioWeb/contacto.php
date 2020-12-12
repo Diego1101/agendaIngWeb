@@ -105,7 +105,7 @@ header('Content-Type: application/json');
             case 'listar':
                 include_once 'conexion.php';
                 if ($conn = mysqli_connect($server, $dbuser, $dbpass, $bd)) {
-                    $renglon = mysqli_query($conn, "SELECT A.USU_CVE ID, CONCAT(A.USU_NOM,' ',A.USU_AP) NOMBRE, B.ROL_DES ROL, A.USU_ROL USUROL, A.USU_TEL TEL, A.USU_EMAIL EMAIL
+                    $renglon = mysqli_query($conn, "SELECT A.USU_CVE ID, CONCAT(A.USU_NOM,' ',A.USU_AP) NOMBRE, B.ROL_NOM ROL, A.USU_ROL USUROL, A.USU_TEL TEL, A.USU_EMAIL EMAIL
                     FROM USUARIO A, ROL B 
                     WHERE A.USU_ROL=B.ROL_CVE;");
                     $i=0;
@@ -122,15 +122,25 @@ header('Content-Type: application/json');
                 echo json_encode($datos, JSON_UNESCAPED_UNICODE);
             break;
             case 'buscar':
+                $nombre='.w';
+                $carrera='.w';
+                $semestre='.w';
+                $grupo='.w';
+                $rol='.w';
                 if (isset($_REQUEST['rol'])) $rol = $_REQUEST['rol'];
                 if (isset($_REQUEST['carrera'])) $carrera = $_REQUEST['carrera'];
                 if (isset($_REQUEST['grupo'])) $grupo = $_REQUEST['grupo'];
                 if (isset($_REQUEST['semestre'])) $semestre = $_REQUEST['semestre'];
+                if (isset($_REQUEST['nombre'])) $nombre = $_REQUEST['nombre'];
                 include 'conexion.php';
                 if ($conn = mysqli_connect($server, $dbuser, $dbpass, $bd)) {
-                    $renglon = mysqli_query($conn, "SELECT A.USU_CVE ID, CONCAT(A.USU_NOM,' ',A.USU_AP) NOMBRE, B.ROL_DES ROL, A.USU_ROL USUROL, A.USU_TEL TEL, A.USU_EMAIL EMAIL, C.CAR_NOM CARRERA, S.SEM_NOM	SEMESTRE, G.GRU_NOM GRUPO FROM USUARIO A, ROL B, CARRERA C, SEMESTRE S, GRUPO G 
-                    WHERE A.USU_ROL=B.ROL_CVE AND A.USU_CAR = C.CAR_CVE AND A.USU_SEM = S.SEM_CVE AND A.USU_GRU = G.GRU_CVE AND A.USU_CAR LIKE '$carrera%' AND A.USU_SEM LIKE '$semestre%' AND A.USU_GRU LIKE '$grupo%' AND A.USU_ROL LIKE '$rol%';");
-                    
+                    if($rol!='Alumno' && $carrera=='.w' && $semestre==".w" && $grupo=='.w' ){
+                        $renglon = mysqli_query($conn, "SELECT A.USU_CVE ID, CONCAT(A.USU_NOM,' ',A.USU_AP) NOMBRE, A.USU_ROL USUROL, B.ROL_NOM ROL, A.USU_TEL TEL, A.USU_EMAIL EMAIL FROM USUARIO A, ROL B
+                        WHERE A.USU_ROL=B.ROL_CVE AND (A.USU_NOM LIKE '%$nombre%' OR B.ROL_NOM LIKE '%$rol%');");
+                    }else{
+                        $renglon = mysqli_query($conn, "SELECT A.USU_CVE ID, CONCAT(A.USU_NOM,' ',A.USU_AP) NOMBRE, B.ROL_NOM ROL, A.USU_ROL USUROL, A.USU_TEL TEL, A.USU_EMAIL EMAIL, C.CAR_NOM CARRERA, S.SEM_NOM	SEMESTRE, G.GRU_NOM GRUPO FROM USUARIO A, ROL B, CARRERA C, SEMESTRE S, GRUPO G 
+                        WHERE A.USU_ROL=B.ROL_CVE AND A.USU_CAR = C.CAR_CVE AND A.USU_SEM = S.SEM_CVE AND A.USU_GRU = G.GRU_CVE AND (C.CAR_NOM LIKE '%$carrera%' OR S.SEM_NOM LIKE '%$semestre%' OR G.GRU_NOM LIKE '%$grupo%' OR B.ROL_NOM LIKE '%$rol%' OR A.USU_NOM LIKE '%$nombre%');");
+                    }
                     $i = 0;
                     while ($resultado = mysqli_fetch_assoc($renglon)) {
                         $datos[$i]["ID"]= utf8_encode($resultado['ID']);
@@ -138,9 +148,6 @@ header('Content-Type: application/json');
                         $datos[$i]["ROL"] = utf8_encode($resultado['ROL']);
                         $datos[$i]["TELEFONO"] = utf8_encode($resultado['TEL']);
                         $datos[$i]["EMAIL"] = utf8_encode($resultado['EMAIL']);
-                        $datos[$i]["CARRERA"] = utf8_encode($resultado['CARRERA']);
-                        $datos[$i]["SEMESTRE"] = utf8_encode($resultado['SEMESTRE']);
-                        $datos[$i]["GRUPO"] = utf8_encode($resultado['GRUPO']);
                         $i++;
                     }
                     mysqli_close($conn);
@@ -152,7 +159,7 @@ header('Content-Type: application/json');
                     $id = ($_REQUEST['id']);
                     include_once 'conexion.php';
                     if ($conn = mysqli_connect($server, $dbuser, $dbpass, $bd)) {
-                        $renglon = mysqli_query($conn, "SELECT A.USU_CVE ID, CONCAT(A.USU_NOM,' ',A.USU_AP) NOMBRE, B.ROL_DES ROL, A.USU_ROL USUROL, A.USU_TEL TEL, A.USU_EMAIL EMAIL, A.USU_USUARIO USUARIO, A.USU_CAR CARRERA, A.USU_SEM SEMESTRE, A.USU_GRU GRUPO 
+                        $renglon = mysqli_query($conn, "SELECT A.USU_CVE ID, CONCAT(A.USU_NOM,' ',A.USU_AP) NOMBRE, B.ROL_NOM ROL, A.USU_ROL USUROL, A.USU_TEL TEL, A.USU_EMAIL EMAIL, A.USU_USUARIO USUARIO, A.USU_CAR CARRERA, A.USU_SEM SEMESTRE, A.USU_GRU GRUPO 
                         FROM USUARIO A, ROL B 
                         WHERE A.USU_ROL=B.ROL_CVE
                         AND USU_CVE=".$id);
