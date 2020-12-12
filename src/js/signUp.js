@@ -18,15 +18,15 @@ function signUpF(){
         email = frmSignUp.getElementById('email');
         if(r==1){
             role = 2;
-            let params = `op=registrar&&usuario=${user.value}&&contra=${pass.value}&&nombre=${firstName.value}&&ap=${lastName.value}&&rol=${role.value}&&tel=${phone.value}&&email=${email.value}`;
+            let params = `op=registrar&&usuario=${user.value}&&contra=${pass.value}&&nombre=${firstName.value}&&ap=${lastName.value}&&rol=${role.value}&&tel=${phone.value}&&email=${email.value}&&carrera=""&&grupo="&&semestre=""`;
         }
         else{
             role = 1;
-            let params = `op=registrar&&usuario=${user.value}&&contra=${pass.value}&&nombre=${firstName.value}&&ap=${lastName.value}&&rol=${role.value}&&tel=${phone.value}&&email=${email.value} &&carrera=${career.value}&&grupo=${group.value}&&semestre=${semester.value}`;
+            let params = `op=registrar&&usuario=${user.value}&&contra=${pass.value}&&nombre=${firstName.value}&&ap=${lastName.value}&&rol=${role.value}&&tel=${phone.value}&&email=${email.value}&&carrera=${career.value}&&grupo=${group.value}&&semestre=${semester.value}`;
         }
         
         
-        login(params);
+        register(params);
         //const data = new FormData(params);
     });
     console.log(email.value);
@@ -47,7 +47,7 @@ function signUpF(){
         document.getElementById('group').removeAttribute("disabled");
     }
     });
-    let login = (data)=>{
+    let register = (data)=>{
         fetch('../../servicioWeb/contacto.php?'+data, {
             method:'GET'
         }).then(respon=>respon.json())
