@@ -1,5 +1,5 @@
 $(document).ready(function() { 
-    let cId = 1;
+    let cId = sessionStorage.getItem('id');
     $.get("https://agendaing.one-2-go.com/servicioWeb/mensaje.php",{op: 'listar', id: cId}, function(data) {
         showData(data);
     }).fail(function() {
