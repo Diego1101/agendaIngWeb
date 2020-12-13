@@ -1,5 +1,9 @@
 <?php
 header('Content-Type: application/json');
+header('Access-Control-Allow-Origin: *');
+header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method");
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+header("Allow: GET, POST, OPTIONS, PUT, DELETE");
     $usu="";
     $contra="";
     $nom="";
@@ -103,9 +107,9 @@ header('Content-Type: application/json');
             case 'listar':
                 include_once 'conexion.php';
                 if ($conn = mysqli_connect($server, $dbuser, $dbpass, $bd)) {
-                    $renglon = mysqli_query($conn, "SELECT A.USU_CVE ID, CONCAT(A.USU_NOM,' ',A.USU_AP) NOMBRE, B.ROL_NOM ROL, A.USU_ROL USUROL, A.USU_TEL TEL, A.USU_EMAIL EMAIL
-                    FROM USUARIO A, ROL B 
-                    WHERE A.USU_ROL=B.ROL_CVE;");
+                    $renglon = mysqli_query($conn, "SELECT A.USU_CVE ID, CONCAT(A.USU_NOM,' ',A.USU_AP) NOMBRE, B.ROL_NOM ROL, A.USU_ROL USUROL, A.USU_TEL TEL, A.USU_EMAIL EMAIL, C.CAR_NOM CARRERA
+                    FROM USUARIO A, ROL B, CARRERA C
+                    WHERE A.USU_ROL=B.ROL_CVE AND C.CAR_CVE=A.USU_CAR");
                     $i=0;
                     while ($resultado=mysqli_fetch_assoc($renglon)) {
                         $datos[$i]["ID"]= utf8_encode($resultado['ID']);
@@ -113,6 +117,7 @@ header('Content-Type: application/json');
                         $datos[$i]["ROL"] = utf8_encode($resultado['ROL']);
                         $datos[$i]["TELEFONO"] = utf8_encode($resultado['TEL']);
                         $datos[$i]["EMAIL"] = utf8_encode($resultado['EMAIL']);
+                        $datos[$i]["CARRERA"] = utf8_encode($resultado['CARRERA']);
                         $i++;
                     }
                     mysqli_close($conn);
