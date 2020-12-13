@@ -58,9 +58,7 @@ header('Content-Type: application/json');
                         }
                         mysqli_close($conn);
                     }
-                    if((int)$datos["ID"]!=0){
-                        echo json_encode($datos, JSON_UNESCAPED_UNICODE);
-                    }
+                    echo json_encode($datos, JSON_UNESCAPED_UNICODE);
                 }
             break;
             case 'modificar':
