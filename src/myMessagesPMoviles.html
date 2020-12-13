@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html class="bg-white">
-    
+
 <head>
 	<title>Inicio de sesión</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+		integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
 	<link rel="stylesheet" href="css/ssMaster.css">
+	<link rel="stylesheet" href="css/loader.css">
 </head>
 
 <body class="bg-white">
@@ -15,8 +17,10 @@
 			<div class="d-flex justify-content-center wrapper">
 				<div class="input-group-text align-items-start pos-f-t p-0 d-flex flex-column">
 					<nav class="navbar navbar-dark py-auto mx-auto p-2 mb-3">
-						<button class="navbar-toggler border-0 rounded-circle btn" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon mx-2 my-3"></span>
+						<button class="navbar-toggler border-0 rounded-circle btn" type="button" data-toggle="collapse"
+							data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+							aria-expanded="false" aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon mx-2 my-3"></span>
 						</button>
 					</nav>
 					<div class="collapse input-group-text p-0 h-100" id="navbarToggleExternalContent">
@@ -29,26 +33,41 @@
 								<br>
 								<ul class="navbar-nav mr-auto d-flex flex-column w-100">
 									<li class="nav-item">
-										<a class="nav-link pl-5 pr-5" href="myProfilePMoviles.html"><h4>Mi perfil</h4></a>
+										<a class="nav-link pl-5 pr-5" href="myProfilePMoviles.html">
+											<h4>Mi perfil</h4>
+										</a>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link pl-5 pr-5" href="contactsPMoviles.html"><h4>Mis contactos</h4><span class="sr-only">(current)</span></a>
+										<a class="nav-link pl-5 pr-5" href="contactsPMoviles.html">
+											<h4>Mis contactos</h4><span class="sr-only">(current)</span>
+										</a>
 									</li>
 									<li class="nav-item active">
 										<a class="nav-link pl-5 pr-5" href="#">
 											<h4>Mensajes</h4>
 										</a>
 										<ul>
-											<li class="nav-item"><a class="nav-link pr-3 pl-3" href="sendMessPMoviles.html"><h4>Nuevo mensaje</h4></a></li>
-											<li class="nav-item"><a class="nav-link pr-3 pl-3" href="myMessagesPMoviles.html"><h4>Ver mis mensajes</h4></a></li>
-											<li class="nav-item"><a class="nav-link pr-3 pl-3" href="eraseMessPMoviles.html"><h4>Borrar mis mensajes</h4></a></li>
+											<li class="nav-item"><a class="nav-link pr-3 pl-3"
+													href="sendMessPMoviles.html">
+													<h4>Nuevo mensaje</h4>
+												</a></li>
+											<li class="nav-item"><a class="nav-link pr-3 pl-3"
+													href="myMessagesPMoviles.html">
+													<h4>Ver mis mensajes</h4>
+												</a></li>
+											<li class="nav-item"><a class="nav-link pr-3 pl-3"
+													href="eraseMessPMoviles.html">
+													<h4>Borrar mis mensajes</h4>
+												</a></li>
 										</ul>
 									</li>
 								</ul>
 								<div name class="w-100 mt-auto">
 									<ul class="navbar-nav mr-auto d-flex flex-column w-100">
 										<li class="nav-item">
-											<a class="nav-link pl-5 pr-5" href="loginPMoviles.html"><h4>Salir</h4></a>
+											<a class="nav-link pl-5 pr-5" href="loginPMoviles.html">
+												<h4>Salir</h4>
+											</a>
 										</li>
 									</ul>
 									<!--form class="form-inline my-2 my-lg-0">
@@ -63,101 +82,44 @@
 				</div>
 			</div>
 			<div class="d-flex w-100 justify-content-center">
-				
 				<form action="#" method="post" class="w-100 mt-5 pt-5">
 					<div class="d-flex justify-content-center mx-auto mt-3">
 						<img class="img-fluid w-75 img-salle" src="images/logoSalle.jpg">
 					</div>
-					
-                    <br>
-                    <h1 class="text-center mx-auto" href="#">Servicio de mensajería ULSAP</h1><br>
-                    <h3 class="text-center mx-auto" href="#">Bandeja de entrada</h3>
-					
+
+					<br>
+					<h1 class="text-center mx-auto" href="#">Servicio de mensajería ULSAP</h1><br>
+					<h3 class="text-center mx-auto" href="#">Bandeja de entrada</h3>
+
 					<div class="d-flex justify-content-end mt-5">
-						</div>
-						<div class="row justify-content-center">
+					</div>
+					<div class="row justify-content-center">
 						<div class="col-10">
-							<table class="table justify-content-center text-center">
+							<table id="tableMessages" class="table justify-content-center text-center">
 								<thead class="thead-dark">
-								<tr>
-									<th class="w-auto" scope="col">ID</th>
-									<th class="w-25" scope="col">Nombre</th>
-									<th class="w-50" scope="col">Mensaje</th>
-									<th class="w-auto" scope="col">Opciones</th>
-								</tr>
+									<tr>
+										<th class="w-auto" scope="col">ID</th>
+										<th class="w-25" scope="col">Nombre</th>
+										<th class="w-50" scope="col">Mensaje</th>
+										<th class="w-auto" scope="col">Opciones</th>
+									</tr>
 								</thead>
 								<tbody>
-								<tr>
-									<th scope="row">1</th>
-									<td>Mark Otto</td>
-									<td class="text-left">Hola, estábamos pensando en invitarte, pero ya no, gracias por poner...</td>
-									<td>
-										<button type="submit" name="button" class="btn btn-lg p-2"><i class="fas fa-envelope-open fa-lg"></i></button>
-										<button type="submit" name="button" class="btn btn-lg p-2"><i class="fas fa-reply fa-lg"></i></button>
-										<button type="submit" name="button" class="btn btn-lg p-2"><i class="fas fa-trash fa-lg"></i></button>
-									</td>
-								</tr>
-								<tr>
-									<th scope="row">2</th>
-									<td>Diego Mendoza Reyes</td>
-									<td class="text-left">Ingeniería Cibernética</td>
-									<td>
-										<button type="submit" name="button" class="btn btn-lg p-2"><i class="fas fa-envelope-open fa-lg"></i></button>
-										<button type="submit" name="button" class="btn btn-lg p-2"><i class="fas fa-reply fa-lg"></i></button>
-										<button type="submit" name="button" class="btn btn-lg p-2"><i class="fas fa-trash fa-lg"></i></button>
-									</td>
-								</tr>
-								<tr>
-									<th scope="row">3</th>
-									<td>Mark Otto</td>
-									<td class="text-left">Quedan letras chetas detrás mientras te traspasan...</td>
-									<td>
-										<button type="submit" name="button" class="btn btn-lg p-2"><i class="fas fa-envelope-open fa-lg"></i></button>
-										<button type="submit" name="button" class="btn btn-lg p-2"><i class="fas fa-reply fa-lg"></i></button>
-										<button type="submit" name="button" class="btn btn-lg p-2"><i class="fas fa-trash fa-lg"></i></button>
-									</td>
-								</tr>
-								<tr>
-									<th scope="row">4</th>
-									<td>Diego Mendoza Reyes</td>
-									<td class="text-left">Tengo un reventilador, para cuando hace calor...</td>
-									<td>
-										<button type="submit" name="button" class="btn btn-lg p-2"><i class="fas fa-envelope-open fa-lg"></i></button>
-										<button type="submit" name="button" class="btn btn-lg p-2"><i class="fas fa-reply fa-lg"></i></button>
-										<button type="submit" name="button" class="btn btn-lg p-2"><i class="fas fa-trash fa-lg"></i></button>
-									</td>
-								</tr>
-								<tr>
-									<th scope="row">5</th>
-									<td>Mark Otto</td>
-									<td class="text-left">Asdgfhsfghs</td>
-									<td>
-										<button type="submit" name="button" class="btn btn-lg p-2"><i class="fas fa-envelope-open fa-lg"></i></button>
-										<button type="submit" name="button" class="btn btn-lg p-2"><i class="fas fa-reply fa-lg"></i></button>
-										<button type="submit" name="button" class="btn btn-lg p-2"><i class="fas fa-trash fa-lg"></i></button>
-									</td>
-								</tr>
-								<tr>
-									<th scope="row">6</th>
-									<td>Diego Mendoza Reyes</td>
-									<td class="text-left">gfhjssethtyjdehsde</td>
-									<td>
-										<button type="submit" name="button" class="btn btn-lg p-2"><i class="fas fa-envelope-open fa-lg"></i></button>
-										<button type="submit" name="button" class="btn btn-lg p-2"><i class="fas fa-reply fa-lg"></i></button>
-										<button type="submit" name="button" class="btn btn-lg p-2"><i class="fas fa-trash fa-lg"></i></button>
-									</td>
-								</tr>
+									<tr>
+										<th class="w-auto text-center" colspan="4">No se encontraton mensajes</th>
+									</tr>
 								</tbody>
 							</table>
 						</div>
-						</div>
-					
+					</div>
 				</form>
 			</div>
 		</div>
 	</div>
-	        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<div class="loading" id="loader">Loading&#8230;</div>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+	<script src="js/messagesList.js"></script>
 </body>
 </html>
