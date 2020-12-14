@@ -66,21 +66,38 @@ function listarMensajes() {
         $datos = array();
         $id = $_REQUEST['id'];
 
+        $conditions = '';
         $rol = '';
         $carrera = '';
         $grupo = '';
         $semestre = '';
-        if (isset($_REQUEST['rol'])) $rol = $_REQUEST['rol'];
-        if (isset($_REQUEST['carrera'])) $carrera = $_REQUEST['carrera'];
-        if (isset($_REQUEST['grupo'])) $grupo = $_REQUEST['grupo'];
-        if (isset($_REQUEST['semestre'])) $semestre = $_REQUEST['semestre'];
-
+        $idUs = '';
+        if (isset($_REQUEST['rol'])) {
+            $rol = $_REQUEST['rol'];
+            $conditions .= $conditions.'AND MEN_TIPO = '.$rol.' ';
+        }
+        if (isset($_REQUEST['carrera'])) {
+            $carrera = $_REQUEST['carrera'];
+            $conditions .= 'AND MEN_CAR = '.$carrera.' ';
+        }
+        if (isset($_REQUEST['grupo'])) {
+            $grupo = $_REQUEST['grupo'];
+            $conditions .= 'AND MEN_GRU = '.$grupo.' ';
+        }
+        if (isset($_REQUEST['semestre'])) {
+            $semestre = $_REQUEST['semestre'];
+            $conditions .= 'AND MEN_SEM = '.$semestre.' ';
+        }
+        if (isset($_REQUEST['idDes'])) {
+            $idDes = $_REQUEST['idDes'];
+            $conditions .= 'AND (TRA_DES = '.$idDes.' OR MEN_REM = '.$idDes.') ';
+        }
 
         include 'conexion.php';
         if ($conn = mysqli_connect($server, $dbuser, $dbpass, $bd)) {
-            $renglon = mysqli_query($conn, "SELECT MEN_CVE ID, MEN_REM REMITENTE, MEN_NOM MENSAJE, TRA_DES DESTINATARIO, MEN_FECHA FECHA, MEN_CAR CARRERA, MEN_SEM SEMESTRE, MEN_GRU GRUPO, MEN_TIPO ROL FROM MENSAJE, TRANSACCION WHERE MEN_STA=1 AND MEN_REM=$id AND TRA_MEN=MEN_CVE AND MEN_CAR LIKE '$carrera%' AND MEN_SEM LIKE '$semestre%' AND MEN_GRU LIKE '$grupo%' AND MEN_TIPO LIKE '$rol%'
+            $renglon = mysqli_query($conn, "SELECT MEN_CVE ID, MEN_REM REMITENTE, MEN_NOM MENSAJE, TRA_DES DESTINATARIO, MEN_FECHA FECHA, MEN_CAR CARRERA, MEN_SEM SEMESTRE, MEN_GRU GRUPO, MEN_TIPO ROL FROM MENSAJE, TRANSACCION WHERE MEN_STA=1 AND MEN_REM=$id AND TRA_MEN=MEN_CVE $conditions
             UNION
-            SELECT MEN_CVE ID, MEN_REM REMITENTE, MEN_NOM MENSAJE, TRA_DES DESTINATARIO, MEN_FECHA FECHA, MEN_CAR CARRERA, MEN_SEM SEMESTRE, MEN_GRU GRUPO, MEN_TIPO ROL FROM MENSAJE, TRANSACCION WHERE MEN_STA=1 AND TRA_MEN=MEN_CVE AND TRA_DES=$id AND MEN_CAR LIKE '$carrera%' AND MEN_SEM LIKE '$semestre%' AND MEN_GRU LIKE '$grupo%' AND MEN_TIPO LIKE '$rol%'");
+            SELECT MEN_CVE ID, MEN_REM REMITENTE, MEN_NOM MENSAJE, TRA_DES DESTINATARIO, MEN_FECHA FECHA, MEN_CAR CARRERA, MEN_SEM SEMESTRE, MEN_GRU GRUPO, MEN_TIPO ROL FROM MENSAJE, TRANSACCION WHERE MEN_STA=1 AND TRA_MEN=MEN_CVE AND TRA_DES=$id $conditions");
             $i = -1;
             while ($resultado = mysqli_fetch_assoc($renglon)) {
                 if($i<0 || $datos[$i]["ID"] != $resultado["ID"]) {
