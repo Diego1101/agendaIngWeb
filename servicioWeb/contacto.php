@@ -162,13 +162,15 @@ header("Allow: GET, POST, OPTIONS, PUT, DELETE");
                     $id = ($_REQUEST['id']);
                     include_once 'conexion.php';
                     if ($conn = mysqli_connect($server, $dbuser, $dbpass, $bd)) {
-                        $renglon = mysqli_query($conn, "SELECT A.USU_CVE ID, CONCAT(A.USU_NOM,' ',A.USU_AP) NOMBRE, B.ROL_NOM ROL, A.USU_ROL USUROL, A.USU_TEL TEL, A.USU_EMAIL EMAIL, A.USU_USUARIO USUARIO, A.USU_CAR CARRERA, A.USU_SEM SEMESTRE, A.USU_GRU GRUPO 
+                        $renglon = mysqli_query($conn, "SELECT A.USU_CVE ID, CONCAT(A.USU_NOM,' ',A.USU_AP) NOMBRE, A.USU_NOM NOM, A.USU_AP AP,  B.ROL_NOM ROL, A.USU_ROL USUROL, A.USU_TEL TEL, A.USU_EMAIL EMAIL, A.USU_USUARIO USUARIO, A.USU_CAR CARRERA, A.USU_SEM SEMESTRE, A.USU_GRU GRUPO 
                         FROM USUARIO A, ROL B 
                         WHERE A.USU_ROL=B.ROL_CVE
                         AND USU_CVE=".$id);
                         while ($resultado = mysqli_fetch_assoc($renglon)) {
                             $datos["ID"]=utf8_encode($resultado['ID']);
                             $datos["NOMBRE"]= utf8_encode($resultado['NOMBRE']);
+                            $datos["NOM"]= utf8_encode($resultado['NOM']);
+                            $datos["AP"]= utf8_encode($resultado['AP']);
                             $datos["ROL"] = utf8_encode($resultado['ROL']);
                             $datos["USUARIO"] = utf8_encode($resultado['USUARIO']);
                             $datos["TELEFONO"] = utf8_encode($resultado['TEL']);
