@@ -10,7 +10,7 @@ function mainLogin(){
         //const data = new FormData(params);
     });
     let login = (data)=>{
-        fetch('../servicioWeb/contacto.php?'+data, {
+        fetch('https://agendaing.one-2-go.com/servicioWeb/contacto.php?'+data, {
             method:'GET'
         }).then(respon=>respon.json())
         .then(respon=>verify(respon))
@@ -18,6 +18,6 @@ function mainLogin(){
     let verify = (res)=>{
         sessionStorage.setItem('id', res.ID);
         console.log(res);
-        window.location.href = '../src/myMessagesPMoviles.html';
+        window.location.href = 'myMessagesPMoviles.html';
     }
 }
