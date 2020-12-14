@@ -18,5 +18,6 @@ function mainLogin(){
     let verify = (res)=>{
         sessionStorage.setItem('id', res.ID);
         console.log(res);
+        window.location.href = '../src/myMessagesPMoviles.html';
     }
 }

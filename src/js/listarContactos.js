@@ -15,11 +15,15 @@ function showData(data) {
         "<td>" + mensaje.NOMBRE + "</td>"+
         "<td>" + mensaje.CARRERA + "</td>"+
         "<td>" + mensaje.EMAIL + "</td>"+
-        "<td><button class='btn btn-lg p-2' onclick='enviarMensaje("+mensaje.ID+")'><i class='fas fa-comments fa-lg'></i></button></td></tr>"
+        "<td><button class='btn btn-lg p-2' onclick='enviarMensaje("+mensaje.ID+", `" + mensaje.NOMBRE +"`)'><i class='fas fa-comments fa-lg'></i></button></td></tr>"
         );								
     });
 }
 
-function enviarMensaje(id){
-    console.log('respondiedo '+ id);
+function enviarMensaje(id, name){
+    sessionStorage.setItem('idDes', id);
+    sessionStorage.setItem('nameDes', name);
+    console.log('Respondiendo a '+ id + " con nombre: "+ name);
+    window.location.href = "sendMessPMoviles.html";
+    //window.location.replace("../sendMessPMoviles.html?"+params);
 }
