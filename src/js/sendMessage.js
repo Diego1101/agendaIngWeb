@@ -1,30 +1,62 @@
 document.addEventListener('DOMContentLoaded', mainMessage);
 function mainMessage(){
-    let us
+    const op = '';
     $('#loader').hide();
     //document.getElementById('to').removeAttribute("disabled");
     var cId = sessionStorage.getItem('id');
     var idDes = sessionStorage.getItem('idDes');
     var nameDes = sessionStorage.getItem('nameDes');
-    if (nameDes != "" && nameDes != null && nameDes != "undefined"){
+    if (nameDes != "" && nameDes != null){
         document.getElementById('to').setAttribute("value", nameDes);
         document.getElementById('to').setAttribute("disabled", "true");
+        document.getElementById('divddlTo').style.display = 'none';
+        document.getElementById('divTo').style.display = 'fluid';
+        op = '1';
     }
     else{
-        alert("Ocurrió un error, intenta de nuevo más tarde");
-        window.location.href = 'myMessagesPMoviles.html';
+        document.getElementById('divddlTo').style.display = 'fluid';
+        document.getElementById('divTo').style.display = 'none';
+        $.get("https://localhost/agendaIngWeb/servicioWeb/contacto.php",{op: 'listar'}, function(data) {
+        users = data;
+        users.forEach(userTo => {
+            $('#ddlTo').append("<option value='"+users.ID+"'>"+users.NOMBRE+"</option>")	
+        });
+        }).fail(function() {
+            alert('Error');
+        });
+        op = '2';
     }
     //$('#tableMessages tbody').append("<tr><th scope=row'>" + mensaje.ID + "</th>";
     const frmNewMess = document.getElementById('newMessage');
     frmNewMess.addEventListener('submit', function(e){
         e.preventDefault();
         let mess = document.getElementById('mess');
+        if(op == '1'){
+            if(cId != 0 && cId != null){
+                let params = `op=crear&&mensaje=${mess.value}&&id=${cId}&&us=${idDes}`;
+                message(params);
+            }
+        }
+        else if(op == '2'){
+            if(cId != 0 && cId != null){
+                if(idDes != 0 && idDes != null){
+                    let idDest = document.getElementById('ddlTo');
+                    let params = `op=crear&&mensaje=${mess.value}&&id=${cId}&&us=${idDest.value}`;
+                    message(params);
+                }
+                else{
+                    alert("Se debe seleccionar un usuario, por favor, revise su selección.");
+                }
+            }
+            else{
+                alert("Su sesión ha caducado, por favor inicie sesión de nuevo.");
+            }
+        }
+        else{
+            alert("Alo salió mal, por favor intenta más tarde");
+        }
         
-        let career = "" /*document.getElementById('career')*/;
-        let group = ""/*document.getElementById('group')*/;
-        let semester = ""/*document.getElementById('semester')*/;
-        let params = `op=crear&&mensaje=${mess.value}&&id=${cId}&&us=${idDes}`;
-        message(params);
+        
         //const data = new FormData(params);
     });
     let message = (data)=>{

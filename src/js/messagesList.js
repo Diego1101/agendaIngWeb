@@ -13,8 +13,8 @@ function showData(data) {
     data.reverse().forEach(mensaje => {
         $('#tableMessages tbody').append("<tr><th scope=row'>" + mensaje.ID + "</th>"+
         "<td>" + mensaje.REMITENTE.Nombre + "</td>"+
-        "<td class='text-left'>" + mensaje.MENSAJE+ "</td>"+
-        "<td><button class='btn btn-lg p-2' onclick='reponderMensaje("+mensaje.ID+", `" + mensaje.NOMBRE +"`)'><i class='fas fa-reply fa-lg'></i></button></td></tr>"
+        "<td class='text-left'>" + mensaje.MENSAJE+ "</td>"+ 
+        "<td><button class='btn btn-lg p-2' onclick='reponderMensaje("+mensaje.REMITENTE.Id +", `" + mensaje.REMITENTE.Nombre +"`)'><i class='fas fa-reply fa-lg'></i></button></td></tr>"
         );								
     });
 }
