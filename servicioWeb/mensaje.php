@@ -117,11 +117,10 @@ function listarMensajes() {
                     $datos[$i]["DESTINATARIOS"] = array();
                 }
 
-                if ($resultado["REMITENTE"] == $id) {
-                    $datos[$i]["TIPO"] = 'Enviado'; 
-                    array_push($datos[$i]["DESTINATARIOS"], $usuarios[$resultado["DESTINATARIO"]]);
-                }
+                if ($resultado["REMITENTE"] == $id) $datos[$i]["TIPO"] = 'Enviado'; 
                 else $datos[$i]["TIPO"] = 'Recibido'; 
+                array_push($datos[$i]["DESTINATARIOS"], $usuarios[$resultado["DESTINATARIO"]]);
+
             }
             mysqli_close($conn);
         }
