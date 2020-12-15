@@ -97,7 +97,7 @@ function listarMensajes() {
         if ($conn = mysqli_connect($server, $dbuser, $dbpass, $bd)) {
             $renglon = mysqli_query($conn, "SELECT MEN_CVE ID, MEN_REM REMITENTE, MEN_NOM MENSAJE, TRA_DES DESTINATARIO, MEN_FECHA FECHA, MEN_CAR CARRERA, MEN_SEM SEMESTRE, MEN_GRU GRUPO, MEN_TIPO ROL FROM MENSAJE, TRANSACCION WHERE MEN_STA=1 AND MEN_REM=$id AND TRA_MEN=MEN_CVE $conditions
             UNION
-            SELECT MEN_CVE ID, MEN_REM REMITENTE, MEN_NOM MENSAJE, TRA_DES DESTINATARIO, MEN_FECHA FECHA, MEN_CAR CARRERA, MEN_SEM SEMESTRE, MEN_GRU GRUPO, MEN_TIPO ROL FROM MENSAJE, TRANSACCION WHERE MEN_STA=1 AND TRA_MEN=MEN_CVE AND TRA_DES=$id $conditions ORDER BY FECHA DESC");
+            SELECT MEN_CVE ID, MEN_REM REMITENTE, MEN_NOM MENSAJE, TRA_DES DESTINATARIO, MEN_FECHA FECHA, MEN_CAR CARRERA, MEN_SEM SEMESTRE, MEN_GRU GRUPO, MEN_TIPO ROL FROM MENSAJE, TRANSACCION WHERE MEN_STA=1 AND TRA_MEN=MEN_CVE AND TRA_DES=$id $conditions ORDER BY FECHA ASC");
             $i = -1;
             while ($resultado = mysqli_fetch_assoc($renglon)) {
                 if($i<0 || $datos[$i]["ID"] != $resultado["ID"]) {
@@ -117,11 +117,10 @@ function listarMensajes() {
                     $datos[$i]["DESTINATARIOS"] = array();
                 }
 
-                if ($resultado["REMITENTE"] == $id) {
-                    $datos[$i]["TIPO"] = 'Enviado'; 
-                    array_push($datos[$i]["DESTINATARIOS"], $usuarios[$resultado["DESTINATARIO"]]);
-                }
+                if ($resultado["REMITENTE"] == $id) $datos[$i]["TIPO"] = 'Enviado'; 
                 else $datos[$i]["TIPO"] = 'Recibido'; 
+                array_push($datos[$i]["DESTINATARIOS"], $usuarios[$resultado["DESTINATARIO"]]);
+
             }
             mysqli_close($conn);
         }
