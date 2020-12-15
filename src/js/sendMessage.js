@@ -6,7 +6,7 @@ function mainMessage(){
     var cId = sessionStorage.getItem('id');
     var idDes = sessionStorage.getItem('idDes');
     var nameDes = sessionStorage.getItem('nameDes');
-    if (nameDes != "" && nameDes != null){
+    if (nameDes != "" && nameDes != null && idDes != "" && idDes != null){
         document.getElementById('to').setAttribute("value", nameDes);
         document.getElementById('to').setAttribute("disabled", "true");
         document.getElementById('divddlTo').style.display = 'none';
@@ -19,7 +19,7 @@ function mainMessage(){
         $.get("https://agendaing.one-2-go.com/servicioWeb/contacto.php",{op: 'listar'}, function(data) {
         users = data;
         users.forEach(userTo => {
-            $('#ddlTo').append("<option value='"+users.ID+"'>"+users.NOMBRE+"</option>")	
+            $('#ddlTo').append("<option value='"+userTo.ID+"'>"+ userTo.NOMBRE +"</option>")	
         });
         }).fail(function() {
             alert('Error');
@@ -50,6 +50,7 @@ function mainMessage(){
             }
             else{
                 alert("Su sesión ha caducado, por favor inicie sesión de nuevo.");
+                window.location.href = 'loginPMoviles.html';
             }
         }
         else{
@@ -68,13 +69,14 @@ function mainMessage(){
     let verify = (res)=>{
         console.log(res);
         if(res.RES == 1){
-            alert("Se envió el mensaje a :" + nameDes);
+            alert("Se envió el mensaje a: " + nameDes);
             sessionStorage.clear('idDes');
             sessionStorage.clear('nameDes');
             window.location.href = 'myMessagesPMoviles.html';
         }
         else{
-            alert("Ocurrió un error al enviar el mensaje a :" + nameDes);
+            alert("Ocurrió un error al enviar el mensaje a: " + nameDes);
+            window.location.href = 'myMessagesPMoviles.html';
         }
         
     }
