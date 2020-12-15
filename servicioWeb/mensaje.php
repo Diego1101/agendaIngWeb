@@ -124,7 +124,7 @@ function listarMensajes() {
             }
             mysqli_close($conn);
         }
-        echo json_encode($datos);
+        echo json_encode($datos, JSON_UNESCAPED_UNICODE);
     }
     else {
         http_response_code(400);
