@@ -16,10 +16,10 @@ function mainMessage(){
     else{
         document.getElementById('divddlTo').style.display = 'fluid';
         document.getElementById('divTo').style.display = 'none';
-        $.get("https://localhost/agendaIngWeb/servicioWeb/contacto.php",{op: 'listar'}, function(data) {
+        $.get("https://agendaing.one-2-go.com/servicioWeb/contacto.php",{op: 'listar'}, function(data) {
         users = data;
         users.forEach(userTo => {
-            $('#ddlTo').append("<option value='"+users.ID+"'>"+users.NOMBRE+"</option>")	
+            $('#ddlTo').append("<option value='"+userTo.ID+"'>"+userTo.NOMBRE+"</option>")	
         });
         }).fail(function() {
             alert('Error');
@@ -27,21 +27,21 @@ function mainMessage(){
         op = '2';
     }
     //$('#tableMessages tbody').append("<tr><th scope=row'>" + mensaje.ID + "</th>";
-    const frmNewMess = document.getElementById('newMessage');
-    frmNewMess.addEventListener('submit', function(e){
-        e.preventDefault();
+    const btnEnviar = document.getElementById('btnEnviarMensaje');
+    btnEnviar.addEventListener('click', function(){
         let mess = document.getElementById('mess');
         if(op == '1'){
             if(cId != 0 && cId != null){
-                let params = `op=crear&&mensaje=${mess.value}&&id=${cId}&&us=${idDes}`;
+                let params = `op=crear&&mensaje=${mess.value}&&id=${cId}&&idDes=${idDes}`;
                 message(params);
             }
         }
         else if(op == '2'){
-            if(cId != 0 && cId != null){
-                if(idDes != 0 && idDes != null){
+            nameDes = $('#ddlTo option:selected').text();
+            if(cId != 0 && cId != null) {
+                if($('#ddlTo').val() != 0 && $('#ddlTo option:selected').val() != null){
                     let idDest = document.getElementById('ddlTo');
-                    let params = `op=crear&&mensaje=${mess.value}&&id=${cId}&&us=${idDest.value}`;
+                    let params = `op=crear&&mensaje=${mess.value}&&id=${cId}&&idDes=${idDest.value}`;
                     message(params);
                 }
                 else{
@@ -68,13 +68,13 @@ function mainMessage(){
     let verify = (res)=>{
         console.log(res);
         if(res.RES == 1){
-            alert("Se envió el mensaje a :" + nameDes);
-            sessionStorage.clear('idDes');
-            sessionStorage.clear('nameDes');
+            alert("Se envió el mensaje a: " + nameDes);
+            sessionStorage.setItem('idDes', null);
+            sessionStorage.setItem('nameDes', null);
             window.location.href = 'myMessagesPMoviles.html';
         }
         else{
-            alert("Ocurrió un error al enviar el mensaje a :" + nameDes);
+            alert("Ocurrió un error al enviar el mensaje a: " + nameDes);
         }
         
     }

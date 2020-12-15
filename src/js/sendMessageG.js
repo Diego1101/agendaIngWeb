@@ -4,28 +4,28 @@ let semestres = [];
 let roles = [];
 
 $(document).ready(function() {
-    $.get("https://localhost/agendaIngWeb/servicioWeb/catalogos.php",{op: 'carrera'}, function(data) {
+    $.get("https://agendaing.one-2-go.com/servicioWeb/catalogos.php",{op: 'carrera'}, function(data) {
         carreras = data;
         fillDrops()
     }).fail(function() {
         alert('Error');
     });
 
-    $.get("https://localhost/agendaIngWeb/servicioWeb/catalogos.php",{op: 'semestre'}, function(data) {
+    $.get("https://agendaing.one-2-go.com/servicioWeb/catalogos.php",{op: 'semestre'}, function(data) {
         semestres = data;
         fillDrops()
     }).fail(function() {
         alert('Error');
     });
 
-    $.get("https://localhost/agendaIngWeb/servicioWeb/catalogos.php",{op: 'grupo'}, function(data) {
+    $.get("https://agendaing.one-2-go.com/servicioWeb/catalogos.php",{op: 'grupo'}, function(data) {
         grupos = data;
         fillDrops()
     }).fail(function() {
         alert('Error');
     });
 
-    $.get("https://localhost/agendaIngWeb/servicioWeb/catalogos.php",{op: 'rol'}, function(data) {
+    $.get("https://agendaing.one-2-go.com/servicioWeb/catalogos.php",{op: 'rol'}, function(data) {
         roles = data;
         fillDrops()
     }).fail(function() {
@@ -62,7 +62,7 @@ function enviarMensaje() {
     const idUs = sessionStorage.getItem('id');
     
     if(!(car === '-1' && gru === '-1' && rol === '-1' && sem === '-1') && mensaje !== '' ) {
-        $.get("https://localhost/agendaIngWeb/servicioWeb/mensaje.php",{op: 'crear', id: idUs, mensaje: mensaje, rol: rol, carrera: car, grupo: gru, semestre: sem}, function(data) {
+        $.get("https://agendaing.one-2-go.com/servicioWeb/mensaje.php",{op: 'crear', id: idUs, mensaje: mensaje, rol: rol, carrera: car, grupo: gru, semestre: sem}, function(data) {
             if( data.RES === '1'){
                 alert('Mensaje creado');
                 document.location.href = 'myMessagesPMoviles.html';
