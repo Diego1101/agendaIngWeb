@@ -6,9 +6,13 @@ function mainMessage(){
     var cId = sessionStorage.getItem('id');
     var idDes = sessionStorage.getItem('idDes');
     var nameDes = sessionStorage.getItem('nameDes');
-    if (nameDes != "" && nameDes != null){
+    if (nameDes != "" && nameDes != null && nameDes != "undefined"){
         document.getElementById('to').setAttribute("value", nameDes);
         document.getElementById('to').setAttribute("disabled", "true");
+    }
+    else{
+        alert("Ocurrió un error, intenta de nuevo más tarde");
+        window.location.href = 'myMessagesPMoviles.html';
     }
     //$('#tableMessages tbody').append("<tr><th scope=row'>" + mensaje.ID + "</th>";
     const frmNewMess = document.getElementById('newMessage');
