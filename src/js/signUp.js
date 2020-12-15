@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', signUpF);
 let r = 0;
 function signUpF(){
-    $.get("https://localhost/agendaIngWeb/servicioWeb/catalogos.php",{op: 'carrera'}, function(data) {
+    $.get("https://agendaing.one-2-go.com/servicioWeb/catalogos.php",{op: 'carrera'}, function(data) {
         carreras = data;
         if(carreras.length > 0){
             carreras.forEach(carrera => {
@@ -12,7 +12,7 @@ function signUpF(){
         alert('Error');
     });
 
-    $.get("https://localhost/agendaIngWeb/servicioWeb/catalogos.php",{op: 'semestre'}, function(data) {
+    $.get("https://agendaing.one-2-go.com/servicioWeb/catalogos.php",{op: 'semestre'}, function(data) {
         semestres = data;
         if(semestres.length > 0){
             semestres.forEach(semestre => {
@@ -23,7 +23,7 @@ function signUpF(){
         alert('Error');
     });
 
-    $.get("https://localhost/agendaIngWeb/servicioWeb/catalogos.php",{op: 'grupo'}, function(data) {
+    $.get("https://agendaing.one-2-go.com/servicioWeb/catalogos.php",{op: 'grupo'}, function(data) {
         grupos = data;
         if(grupos.length > 0){
             grupos.forEach(grupo => {

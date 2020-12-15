@@ -16,7 +16,7 @@ function mainMessage(){
     else{
         document.getElementById('divddlTo').style.display = 'fluid';
         document.getElementById('divTo').style.display = 'none';
-        $.get("https://localhost/agendaIngWeb/servicioWeb/contacto.php",{op: 'listar'}, function(data) {
+        $.get("https://agendaing.one-2-go.com/servicioWeb/contacto.php",{op: 'listar'}, function(data) {
         users = data;
         users.forEach(userTo => {
             $('#ddlTo').append("<option value='"+users.ID+"'>"+users.NOMBRE+"</option>")	
