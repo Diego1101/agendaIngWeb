@@ -16,9 +16,10 @@ function mainLogin(){
         .then(respon=>verify(respon))
     }
     let verify = (res)=>{
-        sessionStorage.setItem('id', res.ID);
+        
         console.log(res);
         if(res.ID != 0){
+            sessionStorage.setItem('id', res.ID);
             window.location.href = 'myMessagesPMoviles.html';
         }
         else{
