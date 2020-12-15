@@ -69,8 +69,8 @@ function mainMessage(){
         console.log(res);
         if(res.RES == 1){
             alert("Se envió el mensaje a: " + nameDes);
-            sessionStorage.setItem('idDes', null);
-            sessionStorage.setItem('nameDes', null);
+            sessionStorage.setItem('idDes', '');
+            sessionStorage.setItem('nameDes', '');
             window.location.href = 'myMessagesPMoviles.html';
         }
         else{
