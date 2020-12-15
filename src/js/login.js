@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', mainLogin);
 function mainLogin(){
+    sessionStorage.clear();
     const frmLogin = document.getElementById('login');
     frmLogin.addEventListener('submit', function(e){
         e.preventDefault();
