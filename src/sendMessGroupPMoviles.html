@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html class="bg-white">
-    
+
 <head>
 	<title>Enviar mensaje</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+		integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
 	<link rel="stylesheet" href="css/ssMaster.css">
+	<link rel="stylesheet" href="css/loader.css">
 </head>
 
 <body class="bg-white">
@@ -16,8 +18,10 @@
 			<div class="d-flex justify-content-center wrapper">
 				<div class="input-group-text align-items-start pos-f-t p-0 d-flex flex-column">
 					<nav class="navbar navbar-dark py-auto mx-auto p-2 mb-3">
-						<button class="navbar-toggler border-0 rounded-circle btn" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon mx-2 my-3"></span>
+						<button class="navbar-toggler border-0 rounded-circle btn" type="button" data-toggle="collapse"
+							data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+							aria-expanded="false" aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon mx-2 my-3"></span>
 						</button>
 					</nav>
 					<div class="collapse input-group-text p-0 h-100" id="navbarToggleExternalContent">
@@ -30,26 +34,41 @@
 								<br>
 								<ul class="navbar-nav mr-auto d-flex flex-column w-100">
 									<li class="nav-item active">
-										<a class="nav-link pl-5 pr-5" href="myProfilePMoviles.html"><h4>Mi perfil</h4></a>
+										<a class="nav-link pl-5 pr-5" href="myProfilePMoviles.html">
+											<h4>Mi perfil</h4>
+										</a>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link pl-5 pr-5" href="contactsPMoviles.html"><h4>Mis contactos</h4><span class="sr-only">(current)</span></a>
+										<a class="nav-link pl-5 pr-5" href="contactsPMoviles.html">
+											<h4>Mis contactos</h4><span class="sr-only">(current)</span>
+										</a>
 									</li>
 									<li class="nav-item">
 										<a class="nav-link pl-5 pr-5" href="#">
 											<h4>Mensajes</h4>
 										</a>
 										<ul>
-											<li class="nav-item"><a class="nav-link pr-3 pl-3" href="sendMessPMoviles.html"><h4>Nuevo mensaje</h4></a></li>
-											<li class="nav-item"><a class="nav-link pr-3 pl-3" href="myMessagesPMoviles.html"><h4>Ver mis mensajes</h4></a></li>
-											<li class="nav-item"><a class="nav-link pr-3 pl-3" href="eraseMessPMoviles.html"><h4>Borrar mis mensajes</h4></a></li>
+											<li class="nav-item"><a class="nav-link pr-3 pl-3"
+													href="sendMessPMoviles.html">
+													<h4>Nuevo mensaje</h4>
+												</a></li>
+											<li class="nav-item"><a class="nav-link pr-3 pl-3"
+													href="myMessagesPMoviles.html">
+													<h4>Ver mis mensajes</h4>
+												</a></li>
+											<li class="nav-item"><a class="nav-link pr-3 pl-3"
+													href="eraseMessPMoviles.html">
+													<h4>Borrar mis mensajes</h4>
+												</a></li>
 										</ul>
 									</li>
 								</ul>
 								<div class="w-100 mt-auto ex">
 									<ul class="navbar-nav mr-auto d-flex flex-column w-100">
 										<li class="nav-item">
-											<a class="nav-link pl-5 pr-5" href="loginPMoviles.html"><h4>Salir</h4></a>
+											<a class="nav-link pl-5 pr-5" href="loginPMoviles.html">
+												<h4>Salir</h4>
+											</a>
 										</li>
 									</ul>
 									<!--form class="form-inline my-2 my-lg-0">
@@ -64,76 +83,81 @@
 				</div>
 			</div>
 			<div class="d-flex w-100 justify-content-center">
-				
-				<form id="newMessage" class="w-100 mt-5 pt-5">
+
+				<div id="newMessage" class="w-100 mt-5 pt-5">
 					<div class="d-flex justify-content-center mx-auto mt-3">
 						<img class="img-fluid w-75 img-salle" src="images/logoSalle.jpg">
 					</div>
-					
-                    <br>
-                    <h1 class="text-center mx-auto" href="#">Servicio de mensajería ULSAP</h1><br>
-                    <h3 class="text-center mx-auto" href="#">Envío de mensaje grupal</h3>
-					
+
+					<br>
+					<h1 class="text-center mx-auto" href="#">Servicio de mensajería ULSAP</h1><br>
+					<h3 class="text-center mx-auto" href="#">Envío de mensaje grupal</h3>
+
 					<div class="d-flex justify-content-end mt-5">
+					</div>
+					<h5 class="text-center mx-auto" href="#">¿A quien le enviarás el mensaje?</h5>
+					<div class="row justify-content-center mx-auto" style="max-width: 1000px; min-width: 200px;">
+						<div class="col-sm-10">
+							<div class="input-group mb-3 pl-5 pr-5">
+								<div class="input-group-append">
+									<span class="input-group-text"><i class="fas fa-graduation-cap"></i></span>
+								</div>
+								<select id="dropCarreras" class="form-control form-control-lg input_user">
+									<option value="-1">Carrera</option>
+								</select>
+							</div>
+							<div class="input-group mb-3 pl-5 pr-5">
+								<div class="input-group-append">
+									<span class="input-group-text"><i class="fas fa-sort-numeric-down"></i></span>
+								</div>
+								<select id="dropSemestre" class="form-control form-control-lg input_user">
+									<option value="-1">Semestre</option>
+								</select>
+							</div>
+							<div class="input-group mb-3 pl-5 pr-5">
+								<div class="input-group-append">
+									<span class="input-group-text"><i class="fas fa-users"></i></span>
+								</div>
+								<select id="dropGrupo" class="form-control form-control-lg input_user">
+									<option selected value="-1">Grupo</option>
+								</select>
+							</div>
+							<div class="input-group mb-3 pl-5 pr-5">
+								<div class="input-group-append">
+									<span class="input-group-text"><i class="fas fa-users-cog"></i></span>
+								</div>
+								<select id="dropRol" class="form-control form-control-lg input_user">
+									<option value="-1">Rol</option>
+								</select>
+							</div>
+							<div class="input-group mb-3 pl-5 pr-5">
+								<div class="input-group-append">
+									<span class="input-group-text"><i class="fas fa-comment"></i></span>
+								</div>
+								<textarea style="max-height: 200px; min-height: 60px;" type="text" name="mess" id="mess"
+									class="form-control form-control-lg form-control-lg input_user" value=""
+									placeholder="Tu mensaje..." required></textarea>
+							</div>
+							<div class="d-flex justify-content-center mt-3 login_container pl-5 pr-5 m-3">
+								<button style="min-width: 100px;" type="submit" name="button"
+									class="btn btn-lg login_btn w-25" onclick="enviarMensaje()">Enviar mensaje</button>
+							</div>
+							<div class="mt-2">
+								<div class="d-flex justify-content-center links">
+									<a href="contactsPMoviles.html">Cancelar envío</a>
+								</div>
+							</div>
 						</div>
-						<div class="row justify-content-center mx-auto" style="max-width: 1000px; min-width: 200px;">
-                            <div class="col-sm-10">
-                                <div class="input-group mb-3 pl-5 pr-5">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text"><i class="fas fa-graduation-cap"></i></span>
-                                    </div>
-                                    <select name="to" id="to" class="form-control form-control-lg input_user">
-                                        <option disabled selected value="0">Selecciona tu carrera</option>
-                                        <option value="1">Ingeniería Civil</option>
-                                        <option value="2">Ingeniería Industrial</option>
-                                        <option value="3">Ingeniería Mecatrónica</option>
-                                        <option value="4">Ingeniería Cibernética</option>
-                                        <option value="5">Todos</option>
-                                    </select>
-                                </div>
-                                <div class="input-group mb-3 pl-5 pr-5">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text"><i class="fas fa-users"></i></span>
-                                    </div>
-                                    <select name="to" id="to" class="form-control form-control-lg input_user">
-                                        <option disabled selected value="0">¿A qué grupo le enviarás el mensaje?</option>
-                                        <option value="1">101</option>
-                                        <option value="2">102</option>
-                                        <option value="3">201</option>
-                                        <option value="4">202</option>
-                                        <option value="5">301</option>
-                                        <option value="6">401</option>
-                                        <option value="7">501</option>
-                                        <option value="8">601</option>
-                                        <option value="9">701</option>
-                                        <option value="10">801</option>
-                                        <option value="11">901</option>
-                                    </select>
-                                </div>
-                                <div class="input-group mb-3 pl-5 pr-5">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text"><i class="fas fa-comment"></i></span>
-                                    </div>
-                                    <textarea style="max-height: 200px; min-height: 60px;" type="text" name="mess" id="mess" class="form-control form-control-lg form-control-lg input_user" value="" placeholder="Tu mensaje..." required></textarea>
-                                </div>
-                                <div class="d-flex justify-content-center mt-3 login_container pl-5 pr-5 m-3">
-                                    <button style="min-width: 100px;" type="submit" name="button" class="btn btn-lg login_btn w-25">Enviar mensaje</button>
-                                 </div>
-                                 <div class="mt-2">
-                                    <div class="d-flex justify-content-center links">
-                                        <a href="contactsPMoviles.html">Cancelar envío</a>
-                                    </div>
-                                </div>
-                            </div>
-						</div>
-				</form>
+					</div>
+				</div>
 			</div>
 		</div>
-    </div>
-            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-            
+	</div>
+	<div class="loading" id="loader">Loading&#8230;</div>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-    <script src="js/sendMessageG.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+	<script src="js/sendMessageG.js"></script>
 </body>
+
 </html>

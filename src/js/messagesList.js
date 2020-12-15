@@ -10,7 +10,7 @@ $(document).ready(function() {
 function showData(data) {
     $('#loader').hide();
     if(data.length>0) $('#tableMessages tbody').html('');
-    data.forEach(mensaje => {
+    data.reverse().forEach(mensaje => {
         $('#tableMessages tbody').append("<tr><th scope=row'>" + mensaje.ID + "</th>"+
         "<td>" + mensaje.REMITENTE.Nombre + "</td>"+
         "<td class='text-left'>" + mensaje.MENSAJE+ "</td>"+
