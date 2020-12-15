@@ -1,6 +1,39 @@
 document.addEventListener('DOMContentLoaded', signUpF);
 let r = 0;
 function signUpF(){
+    $.get("https://localhost/agendaIngWeb/servicioWeb/catalogos.php",{op: 'carrera'}, function(data) {
+        carreras = data;
+        if(carreras.length > 0){
+            carreras.forEach(carrera => {
+                $('#career').append("<option value='"+carrera.ID+"'>"+carrera.NOMBRE+"</option>")	
+            });
+        }
+    }).fail(function() {
+        alert('Error');
+    });
+
+    $.get("https://localhost/agendaIngWeb/servicioWeb/catalogos.php",{op: 'semestre'}, function(data) {
+        semestres = data;
+        if(semestres.length > 0){
+            semestres.forEach(semestre => {
+                $('#semester').append("<option value='"+semestre.ID+"'>"+semestre.NOMBRE+"</option>")	
+            });
+        }
+    }).fail(function() {
+        alert('Error');
+    });
+
+    $.get("https://localhost/agendaIngWeb/servicioWeb/catalogos.php",{op: 'grupo'}, function(data) {
+        grupos = data;
+        if(grupos.length > 0){
+            grupos.forEach(grupo => {
+                $('#group').append("<option value='"+grupo.ID+"'>"+grupo.NOMBRE+"</option>")	
+            });
+        }
+    }).fail(function() {
+        alert('Error');
+    });
+    $('#loader').hide();
     const frmSignUp = document.getElementById('signUp');
     let email = document.getElementById('email');
     frmSignUp.addEventListener('submit', function(e){
@@ -16,13 +49,14 @@ function signUpF(){
         let semester = document.getElementById('semester');
         let group = document.getElementById('group');
         email = document.getElementById('email');
+        let params = ``;
         if(r==1){
             role = 2;
-            let params = `op=registrar&&usuario=${user.value}&&contra=${pass.value}&&nombre=${firstName.value}&&ap=${lastName.value}&&rol=${role.value}&&tel=${phone.value}&&email=${email.value}&&carrera=""&&grupo="&&semestre=""`;
+            params = `op=registrar&&usuario=${user.value}&&contra=${pass.value}&&nombre=${firstName.value}&&ap=${lastName.value}&&rol=${role.value}&&tel=${phone.value}&&email=${email.value}&&carrera=""&&grupo="&&semestre=""`;
         }
         else{
             role = 1;
-            let params = `op=registrar&&usuario=${user.value}&&contra=${pass.value}&&nombre=${firstName.value}&&ap=${lastName.value}&&rol=${role.value}&&tel=${phone.value}&&email=${email.value}&&carrera=${career.value}&&grupo=${group.value}&&semestre=${semester.value}`;
+            params = `op=registrar&&usuario=${user.value}&&contra=${pass.value}&&nombre=${firstName.value}&&ap=${lastName.value}&&rol=${role.value}&&tel=${phone.value}&&email=${email.value}&&carrera=${career.value}&&grupo=${group.value}&&semestre=${semester.value}`;
         }
         
         

@@ -7,6 +7,7 @@
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
 	<link rel="stylesheet" href="css/ssLogM.css">
+	<link rel="stylesheet" href="css/loader.css">
 </head>
 
 <body>
@@ -14,7 +15,7 @@
 		<div class="d-flex justify-content-center h-100">
 			<div class="user_card_lg">
 				<div class="d-flex justify-content-center form_container">
-					<form class="w-100" id="signUp">
+					<div class="w-100" id="signUp">
 					    <div class="input-group-text mb-2 w-100">
 				            <div class="input-group-append justify-content-center">
 							    <h2>Regístrate</h2>
@@ -58,11 +59,7 @@
 								<span class="input-group-text"><i class="fas fa-graduation-cap"></i></span>
 							</div>
 							 <select name="career" id="career" class="form-control form-control-lg input_user">
-							    <option disabled selected>Selecciona tu carrera</option>
-							    <option value="1">Ingeniería Civil</option>
-							    <option value="2">Ingeniería Industrial</option>
-								<option value="3">Ingeniería Mecatrónica</option>
-								<option value="4">Ingeniería Cibernética</option>
+								<option value="-1">Selecciona tu carrera</option>
 							</select>
 						</div>
 
@@ -70,17 +67,8 @@
 							<div class="input-group-append">
 								<span class="input-group-text"><i class="fas fa-school"></i></span>
 							</div>
-							 <select name="semester" id="semester" class="form-control form-control-lg input_user">
-							    <option disabled selected>Selecciona tu semestre</option>
-								<option value="1">1° Semestre</option>
-								<option value="2">2° Semestre</option>
-								<option value="3">3° Semestre</option>
-								<option value="4">4° Semestre</option>
-								<option value="5">5° Semestre</option>
-								<option value="6">6° Semestre</option>
-								<option value="7">7° Semestre</option>
-								<option value="8">8° Semestre</option>
-							    <option value="9">9° Semestre</option>
+							<select id="semester" name="semester" class="form-control form-control-lg input_user">
+								<option value="-1">Semestre</option>
 							</select>
 						</div>
 
@@ -88,19 +76,8 @@
 							<div class="input-group-append">
 								<span class="input-group-text"><i class="fas fa-users"></i></span>
 							</div>
-							 <select name="group" id="group" class="form-control form-control-lg input_user">
-							    <option disabled selected>Selecciona tu grupo</option>
-							    <option value="101">1</option>
-								<option value="102">2</option>
-								<option value="201">1</option>
-								<option value="202">2</option>
-								<option value="301">1</option>
-								<option value="401">2</option>
-								<option value="501">1</option>
-								<option value="601">2</option>
-								<option value="701">1</option>
-								<option value="801">2</option>
-								<option value="901">2</option>
+							<select id="group" name="group" class="form-control form-control-lg input_user">
+								<option selected value="-1">Grupo</option>
 							</select>
 						</div>
 
@@ -125,12 +102,14 @@
 								<a href="loginPMoviles.html">Regresar</a>
 							</div>
 						</div>
-					</form>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<div class="loading" id="loader">Loading&#8230;</div>
+
+	        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 	<script src="js/signUp.js"></script>
