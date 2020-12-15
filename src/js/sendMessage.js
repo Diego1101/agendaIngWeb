@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', mainMessage);
 function mainMessage(){
-    const op = '';
+    let op = '';
     $('#loader').hide();
     //document.getElementById('to').removeAttribute("disabled");
     var cId = sessionStorage.getItem('id');
