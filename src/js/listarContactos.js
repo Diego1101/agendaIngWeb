@@ -24,6 +24,6 @@ function enviarMensaje(id, name){
     sessionStorage.setItem('idDes', id);
     sessionStorage.setItem('nameDes', name);
     console.log('Respondiendo a '+ id + " con nombre: "+ name);
-    window.location.href = '../src/sendMessPMoviles.html';
+    window.location.href = 'sendMessPMoviles.html';
     //window.location.replace("../sendMessPMoviles.html?"+params);
 }

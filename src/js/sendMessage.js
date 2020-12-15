@@ -32,6 +32,7 @@ function mainMessage(){
     let verify = (res)=>{
         console.log(res);
         if(res.RES == 1){
+            alert("Se envió el mensaje a :" + nameDes);
             sessionStorage.clear('idDes');
             sessionStorage.clear('nameDes');
             window.location.href = 'myMessagesPMoviles.html';
