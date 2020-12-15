@@ -249,3 +249,7 @@ h3{
   #tableOF ::-webkit-scrollbar-thumb:hover {
 	background: #2b4e84;
   }
+
+  .ex{
+	  margin-bottom: 40px;
+  }

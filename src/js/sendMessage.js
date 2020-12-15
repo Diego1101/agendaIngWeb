@@ -1,14 +1,15 @@
 document.addEventListener('DOMContentLoaded', mainMessage);
 function mainMessage(){
+    let us
     $('#loader').hide();
     //document.getElementById('to').removeAttribute("disabled");
     var cId = sessionStorage.getItem('id');
     var idDes = sessionStorage.getItem('idDes');
     var nameDes = sessionStorage.getItem('nameDes');
-    //if (nameDes != "" && nameDes != null){
-    document.getElementById('to').setAttribute("value", nameDes);
-    document.getElementById('to').setAttribute("disabled", "true");
-    //}
+    if (nameDes != "" && nameDes != null){
+        document.getElementById('to').setAttribute("value", nameDes);
+        document.getElementById('to').setAttribute("disabled", "true");
+    }
     //$('#tableMessages tbody').append("<tr><th scope=row'>" + mensaje.ID + "</th>";
     const frmNewMess = document.getElementById('newMessage');
     frmNewMess.addEventListener('submit', function(e){
@@ -23,15 +24,22 @@ function mainMessage(){
         //const data = new FormData(params);
     });
     let message = (data)=>{
-        fetch('../servicioWeb/mensaje.php?'+data, {
+        fetch('https://agendaing.one-2-go.com/servicioWeb/mensaje.php?'+data, {
             method:'POST'
         }).then(respon=>respon.json())
         .then(respon=>verify(respon))
     }
     let verify = (res)=>{
         console.log(res);
-        alert("Su mensaje fue enviado a " + nameDes);
-        window.location.href = 'myMessagesPMoviles.html';
+        if(res.RES == 1){
+            sessionStorage.clear('idDes');
+            sessionStorage.clear('nameDes');
+            window.location.href = 'myMessagesPMoviles.html';
+        }
+        else{
+            alert("Ocurrió un error al enviar el mensaje a :" + nameDes);
+        }
+        
     }
 }
 

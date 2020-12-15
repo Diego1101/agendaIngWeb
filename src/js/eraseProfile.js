@@ -4,19 +4,22 @@ function eraseA(){
     frmEraseA.addEventListener('submit', function(e){
         e.preventDefault();
         let id = sessionStorage.getItem('id');
-        let params = `op=eliminar&&id=${id.value}`;
+        let params = `op=eliminar&&id=${id}`;
         erase(params);
         //const data = new FormData(params);
     });
     let erase = (data)=>{
-        fetch('../servicioWeb/contacto.php?'+data, {
+        fetch('https://agendaing.one-2-go.com/servicioWeb/contacto.php?'+data, {
             method:'GET'
         }).then(respon=>respon.json())
         .then(respon=>verify(respon))
     }
     let verify = (res)=>{
-        sessionStorage.clear('id');
         console.log(res);
-        window.location.href = 'loginPMoviles.html';
+        if(res.ID == 1){
+            sessionStorage.clear('id');
+            window.location.href = 'index.html';
+        }
+        
     }
 }

@@ -1,70 +1,77 @@
-document.addEventListener('DOMContentLoaded', editP);
+//document.addEventListener('DOMContentLoaded', editP);
+let id = '';
+let fname = '';
+let lname = '';
+let career = '';
+let phone = '';
+let email = '';
+let semester = '';
+let group = '';
 
-
-function editP(data) {
-    $(document).ready(function() { 
-        let cId = sessionStorage.getItem('id');
+$(document).ready(function() { 
+    
+    let cId = sessionStorage.getItem('id');
+    if(cId!=null && cId!=0){
         $.get("https://agendaing.one-2-go.com/servicioWeb/contacto.php",{op: 'detalle', id: cId}, function(data) {
             showData(data);
+            editP();
         }).fail(function() {
             alert('Error');
         });
-    });
-}
-
-function showData(data){
+    }
+    else{
+        alert("La sesión expiró, inicie sesión nuevamente.")
+        window.location.href = 'index.html';
+    }
     
+});
+
+function showData(user) {
     $('#loader').hide();
-
-    let id = '';
-    let name = '';
-    let career = '';
-    let phone = '';
-    let email = '';
-    let semester = '';
-    let group = '';
-    
-    if(data.length>0) data.forEach(user => {
+    if(user!=null){
         id = user.ID;
-        name = user.NOMBRE;
+        fname = user.NOM;
+        lname = user.AP;
         career = user.CARRERA;
         phone = user.TELEFONO;
         email = user.EMAIL;
         semester = user.SEMESTRE;
         group = user.GRUPO;
-    });
-        document.getElementById('name').value = name;
+        document.getElementById('name').value = fname + ' ' + lname;
         document.getElementById('phone').setAttribute("value", phone);
         document.getElementById('email').setAttribute("value", email);
         document.getElementById('career').value = career;
         document.getElementById('semester').value = semester;
-        document.getElementById('group').value = group;
-    
+        document.getElementById('group').value = group;			
+       
+    }
+}
+
+function editP(){
+
     const frmEditP = document.getElementById('editProfile');
     frmEditP.addEventListener('submit', function(e){
         e.preventDefault();
-        
-        let nameE = frmSignUp.getElementById('fName');
-        let phoneE = frmSignUp.getElementById('phone');
-        let emailE = frmSignUp.getElementById('email');
+        let nameE = fname;
+        let lNameE = lname;
+        let phoneE = document.getElementById('phone');
+        let emailE = document.getElementById('email');
         let careerE = document.getElementById('career');
         let semesterE = document.getElementById('semester');
         let groupE = document.getElementById('group');
-        let passE = frmSignUp.getElementById('pass');
-        $renglon = mysqli_query($conn, "CALL tspModConta($id, '$nom', '$ap', '$contra', '$tel', '$email', '$carrera', '$semestre', '$grupo');");
-        let params = `op=modificar&&id=${id.value}&&contra=${passE.value}&&nombre=${nameE.value}&&tel=${phoneE.value}&&email=${emailE.value}&&carrera=${careerE.value}&&grupo=${groupE.value}&&semestre=${semesterE.value}`;
+        let passE = document.getElementById('pass');
+        let params = `op=modificar&&id=${id}&&contra=${passE.value}&&nombre=${nameE}&&ap=${lNameE}&&tel=${phoneE.value}&&email=${emailE.value}&&carrera=${careerE.value}&&grupo=${groupE.value}&&semestre=${semesterE.value}`;
         edit(params);
         //const data = new FormData(params);
     });
 
-    let edit = (data)=>{
-        fetch('../servicioWeb/contacto.php?'+data, {
+    let edit = (dat)=>{
+        fetch('https://agendaing.one-2-go.com/servicioWeb/contacto.php?'+dat, {
             method:'POST'
         }).then(respon=>respon.json())
         .then(respon=>verify(respon))
     }
     let verify = (res)=>{
-        sessionStorage.clear('id');
         console.log(res);
         alert("Su información fue modificada con éxito.")
         window.location.href = 'myProfilePMoviles.html';

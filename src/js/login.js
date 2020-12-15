@@ -18,6 +18,12 @@ function mainLogin(){
     let verify = (res)=>{
         sessionStorage.setItem('id', res.ID);
         console.log(res);
-        window.location.href = 'myMessagesPMoviles.html';
+        if(res.ID != 0){
+            window.location.href = 'myMessagesPMoviles.html';
+        }
+        else{
+            alert("El usuario o contraseña son incorrectos, verifica los datos.");
+        }
+        
     }
 }

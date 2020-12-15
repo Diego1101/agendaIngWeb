@@ -14,11 +14,17 @@ function showData(data) {
         $('#tableMessages tbody').append("<tr><th scope=row'>" + mensaje.ID + "</th>"+
         "<td>" + mensaje.REMITENTE.Nombre + "</td>"+
         "<td class='text-left'>" + mensaje.MENSAJE+ "</td>"+
-        "<td><button class='btn btn-lg p-2' onclick='reponderMensaje("+mensaje.REMITENTE+")'><i class='fas fa-envelope-open fa-lg'></i></button>"+
-        "<button class='btn btn-lg p-2' onclick='reponderMensaje("+mensaje.ID+")'><i class='fas fa-reply fa-lg'></i></button>"+
-        "<button class='btn btn-lg p-2' onclick='reponderMensaje("+mensaje.ID+", `" + mensaje.NOMBRE +"`)'><i class='fas fa-trash fa-lg'></i></button></td></tr>"
+        "<td><button class='btn btn-lg p-2' onclick='reponderMensaje("+mensaje.ID+", `" + mensaje.NOMBRE +"`)'><i class='fas fa-reply fa-lg'></i></button></td></tr>"
         );								
     });
+}
+
+function verMensaje(id, name){
+    console.log('viendo '+ id);
+    sessionStorage.setItem('idDes', id);
+    sessionStorage.setItem('nameDes', name);
+    let params = `op=crear&&id=`+id;
+    window.location.href = 'sendMessPMoviles.html';
 }
 
 function reponderMensaje(id, name){
@@ -26,5 +32,5 @@ function reponderMensaje(id, name){
     sessionStorage.setItem('idDes', id);
     sessionStorage.setItem('nameDes', name);
     let params = `op=crear&&id=`+id;
-    window.location.href = 'sendMessPMoviles.html';
+    window.location.href = '../src/sendMessPMoviles.html';
 }

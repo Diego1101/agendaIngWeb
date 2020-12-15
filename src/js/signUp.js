@@ -48,7 +48,7 @@ function signUpF(){
             }
         });
     let register = (data)=>{
-        fetch('../../servicioWeb/contacto.php?'+data, {
+        fetch('https://agendaing.one-2-go.com/servicioWeb/contacto.php?'+data, {
             method:'POST'
         }).then(respon=>respon.json())
         .then(respon=>verify(respon))
