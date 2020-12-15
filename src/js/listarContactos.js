@@ -1,8 +1,8 @@
 $(document).ready(function() {
     $.get("https://agendaing.one-2-go.com/servicioWeb/contacto.php",{op: 'listar'}, function(data) {
         console.log(data);
-        sessionStorage.clear('idDes');
-        sessionStorage.clear('nameDes');
+        sessionStorage.setItem('idDes', '');
+        sessionStorage.setItem('nameDes', '');
         showData(data);
     }).fail(function() {
         alert('Error');
