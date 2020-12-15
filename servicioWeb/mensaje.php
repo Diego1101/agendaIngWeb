@@ -40,7 +40,7 @@ function crearMensaje() {
         if (isset($_REQUEST['carrera'])) $carrera = $_REQUEST['carrera'];
         if (isset($_REQUEST['grupo'])) $grupo = $_REQUEST['grupo'];
         if (isset($_REQUEST['semestre'])) $semestre = $_REQUEST['semestre'];
-        if (isset($_REQUEST['us'])) $dest = $_REQUEST['us'];
+        if (isset($_REQUEST['idDes'])) $dest = $_REQUEST['idDes'];
 
         include_once 'conexion.php';
         if ($conn = mysqli_connect($server, $dbuser, $dbpass, $bd)) {
@@ -97,7 +97,7 @@ function listarMensajes() {
         if ($conn = mysqli_connect($server, $dbuser, $dbpass, $bd)) {
             $renglon = mysqli_query($conn, "SELECT MEN_CVE ID, MEN_REM REMITENTE, MEN_NOM MENSAJE, TRA_DES DESTINATARIO, MEN_FECHA FECHA, MEN_CAR CARRERA, MEN_SEM SEMESTRE, MEN_GRU GRUPO, MEN_TIPO ROL FROM MENSAJE, TRANSACCION WHERE MEN_STA=1 AND MEN_REM=$id AND TRA_MEN=MEN_CVE $conditions
             UNION
-            SELECT MEN_CVE ID, MEN_REM REMITENTE, MEN_NOM MENSAJE, TRA_DES DESTINATARIO, MEN_FECHA FECHA, MEN_CAR CARRERA, MEN_SEM SEMESTRE, MEN_GRU GRUPO, MEN_TIPO ROL FROM MENSAJE, TRANSACCION WHERE MEN_STA=1 AND TRA_MEN=MEN_CVE AND TRA_DES=$id $conditions ");
+            SELECT MEN_CVE ID, MEN_REM REMITENTE, MEN_NOM MENSAJE, TRA_DES DESTINATARIO, MEN_FECHA FECHA, MEN_CAR CARRERA, MEN_SEM SEMESTRE, MEN_GRU GRUPO, MEN_TIPO ROL FROM MENSAJE, TRANSACCION WHERE MEN_STA=1 AND TRA_MEN=MEN_CVE AND TRA_DES=$id $conditions ORDER BY FECHA DESC");
             $i = -1;
             while ($resultado = mysqli_fetch_assoc($renglon)) {
                 if($i<0 || $datos[$i]["ID"] != $resultado["ID"]) {
