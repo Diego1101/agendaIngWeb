@@ -109,7 +109,7 @@ header("Allow: GET, POST, OPTIONS, PUT, DELETE");
                 if ($conn = mysqli_connect($server, $dbuser, $dbpass, $bd)) {
                     $renglon = mysqli_query($conn, "SELECT A.USU_CVE ID, CONCAT(A.USU_NOM,' ',A.USU_AP) NOMBRE, B.ROL_NOM ROL, A.USU_ROL USUROL, A.USU_TEL TEL, A.USU_EMAIL EMAIL, C.CAR_NOM CARRERA
                     FROM USUARIO A, ROL B, CARRERA C
-                    WHERE A.USU_ROL=B.ROL_CVE AND C.CAR_CVE=A.USU_CAR");
+                    WHERE A.USU_ROL=B.ROL_CVE AND A.USU_ESTATUS=1 AND C.CAR_CVE=A.USU_CAR");
                     $i=0;
                     while ($resultado=mysqli_fetch_assoc($renglon)) {
                         $datos[$i]["ID"]= utf8_encode($resultado['ID']);
@@ -139,10 +139,10 @@ header("Allow: GET, POST, OPTIONS, PUT, DELETE");
                 if ($conn = mysqli_connect($server, $dbuser, $dbpass, $bd)) {
                     if($rol!='Alumno' && $carrera=='.w' && $semestre==".w" && $grupo=='.w' ){
                         $renglon = mysqli_query($conn, "SELECT A.USU_CVE ID, CONCAT(A.USU_NOM,' ',A.USU_AP) NOMBRE, A.USU_ROL USUROL, B.ROL_NOM ROL, A.USU_TEL TEL, A.USU_EMAIL EMAIL FROM USUARIO A, ROL B
-                        WHERE A.USU_ROL=B.ROL_CVE AND (A.USU_NOM LIKE '%$nombre%' OR B.ROL_NOM LIKE '%$rol%');");
+                        WHERE A.USU_ROL=B.ROL_CVE AND A.USU_ESTATUS=1 AND (A.USU_NOM LIKE '%$nombre%' OR B.ROL_NOM LIKE '%$rol%');");
                     }else{
                         $renglon = mysqli_query($conn, "SELECT A.USU_CVE ID, CONCAT(A.USU_NOM,' ',A.USU_AP) NOMBRE, B.ROL_NOM ROL, A.USU_ROL USUROL, A.USU_TEL TEL, A.USU_EMAIL EMAIL, C.CAR_NOM CARRERA, S.SEM_NOM	SEMESTRE, G.GRU_NOM GRUPO FROM USUARIO A, ROL B, CARRERA C, SEMESTRE S, GRUPO G 
-                        WHERE A.USU_ROL=B.ROL_CVE AND A.USU_CAR = C.CAR_CVE AND A.USU_SEM = S.SEM_CVE AND A.USU_GRU = G.GRU_CVE AND (C.CAR_NOM LIKE '%$carrera%' OR S.SEM_NOM LIKE '%$semestre%' OR G.GRU_NOM LIKE '%$grupo%' OR B.ROL_NOM LIKE '%$rol%' OR A.USU_NOM LIKE '%$nombre%');");
+                        WHERE A.USU_ROL=B.ROL_CVE AND A.USU_CAR = C.CAR_CVE AND A.USU_SEM = S.SEM_CVE AND A.USU_GRU = G.GRU_CVE AND A.USU_ESTATUS=1 AND (C.CAR_NOM LIKE '%$carrera%' OR S.SEM_NOM LIKE '%$semestre%' OR G.GRU_NOM LIKE '%$grupo%' OR B.ROL_NOM LIKE '%$rol%' OR A.USU_NOM LIKE '%$nombre%');");
                     }
                     $i = 0;
                     while ($resultado = mysqli_fetch_assoc($renglon)) {
