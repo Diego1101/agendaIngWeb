@@ -39,6 +39,7 @@ function mainMessage(){
         }
         else if(op == '2'){
             idDes = $('#ddlTo option:selected').val();
+            nameDes = $('#ddlTo option:selected').text();
             if(cId != 0 && cId != null){
                 if(idDes != 0 && idDes != null){
                     let idDest = document.getElementById('ddlTo');
