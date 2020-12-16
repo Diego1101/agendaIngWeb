@@ -30,7 +30,7 @@ function crearMensaje() {
     if (isset($_REQUEST['id']) && isset($_REQUEST['mensaje'])) {
         $datos = array();
         $id = $_REQUEST['id'];
-        $mensaje = $_REQUEST['mensaje'];
+        $mensaje = utf8_encode($_REQUEST['mensaje']);
         $rol = -1;
         $carrera = -1;
         $grupo = -1;
