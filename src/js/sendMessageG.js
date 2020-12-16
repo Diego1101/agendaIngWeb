@@ -54,6 +54,7 @@ function fillDrops(){
 }
 
 function enviarMensaje() {
+    $('#loader').show();
     const car = $('#dropCarreras option:selected').val();
     const gru = $('#dropGrupo option:selected').val();
     const rol = $('#dropRol option:selected').val();
@@ -65,10 +66,12 @@ function enviarMensaje() {
         $.get("https://agendaing.one-2-go.com/servicioWeb/mensaje.php",{op: 'crear', id: idUs, mensaje: mensaje, rol: rol, carrera: car, grupo: gru, semestre: sem}, function(data) {
             if( data.RES === '1'){
                 alert('Mensaje creado');
+                $('#loader').hide();
                 document.location.href = 'myMessagesPMoviles.html';
             } else console.log('Error');
         }).fail(function() {
             alert('Error');
+            $('#loader').hide();
         });
     } else {
         alert('Seleccionar por lo menos un remitente y el mensaje');
