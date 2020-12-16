@@ -20,10 +20,10 @@ header("Allow: GET, POST, OPTIONS, PUT, DELETE");
             case 'registrar':
                 if(!empty($_REQUEST['nombre']) && !empty($_REQUEST['ap']) && !empty($_REQUEST['usuario']) && !empty($_REQUEST['contra']) && !empty($_REQUEST['rol']))
                 {
-                    $nom=htmlspecialchars($_REQUEST['nombre']);
-                    $ap=htmlspecialchars($_REQUEST['ap']);
-                    $usu=htmlspecialchars($_REQUEST['usuario']);
-                    $contra=htmlspecialchars($_REQUEST['contra']);
+                    $nom=utf8_decode($_REQUEST['nombre']);
+                    $ap=utf8_decode($_REQUEST['ap']);
+                    $usu=utf8_decode($_REQUEST['usuario']);
+                    $contra=utf8_decode($_REQUEST['contra']);
                     $rol= $_REQUEST['rol'];
                     if (isset($_REQUEST['tel'])) $tel = $_REQUEST['tel'];
                     if (isset($_REQUEST['email'])) $email = $_REQUEST['email'];
@@ -69,9 +69,9 @@ header("Allow: GET, POST, OPTIONS, PUT, DELETE");
                 if(!empty($_REQUEST['id']) && !empty($_REQUEST['nombre']) && !empty($_REQUEST['ap']))
                 {
                     $id = $_REQUEST['id'];
-                    $nom=htmlspecialchars($_REQUEST['nombre']);
-                    $ap=htmlspecialchars($_REQUEST['ap']);
-                    $contra=htmlspecialchars($_REQUEST['contra']);
+                    $nom=utf8_decode($_REQUEST['nombre']);
+                    $ap=utf8_decode($_REQUEST['ap']);
+                    $contra=utf8_decode($_REQUEST['contra']);
                     if (isset($_REQUEST['tel'])) $tel = $_REQUEST['tel'];
                     if (isset($_REQUEST['email'])) $email = $_REQUEST['email'];
                     if (isset($_REQUEST['carrera'])) $carrera = $_REQUEST['carrera'];
