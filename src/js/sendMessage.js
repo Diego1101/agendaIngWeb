@@ -29,6 +29,7 @@ function mainMessage(){
     //$('#tableMessages tbody').append("<tr><th scope=row'>" + mensaje.ID + "</th>";
     const frmNewMess = document.getElementById('newMessage');
     frmNewMess.addEventListener('submit', function(e){
+        $('#loader').show();
         e.preventDefault();
         let mess = document.getElementById('mess');
         if(op == '1'){
@@ -80,6 +81,7 @@ function mainMessage(){
             alert("Ocurrió un error al enviar el mensaje a: " + nameDes);
             window.location.href = 'myMessagesPMoviles.html';
         }
+        $('#loader').hide();
         
     }
 }
