@@ -31,6 +31,7 @@ function mainMessage(){
     frmNewMess.addEventListener('submit', function(e){
         e.preventDefault();
         let mess = document.getElementById('mess');
+        let idDest = document.getElementById('ddlTo');
         if(op == '1'){
             if(cId != 0 && cId != null){
                 let params = `op=crear&&mensaje=${mess.value}&&id=${cId}&&us=${idDes}`;
@@ -39,10 +40,13 @@ function mainMessage(){
         }
         else if(op == '2'){
             if(cId != 0 && cId != null){
-                if(idDes != 0 && idDes != null){
-                    let idDest = document.getElementById('ddlTo');
+                if(idDest != 0 && idDest != null){
+                    idDest = document.getElementById('ddlTo');
                     let params = `op=crear&&mensaje=${mess.value}&&id=${cId}&&us=${idDest.value}`;
                     message(params);
+                    sessionStorage.setItem('idDes', idDest.value);
+                    sessionStorage.setItem('nameDes', idDest.options[idDest.selectedIndex].text);
+                    nameDes = sessionStorage.getItem('nameDes');
                 }
                 else{
                     alert("Se debe seleccionar un usuario, por favor, revise su selección.");
