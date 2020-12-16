@@ -83,6 +83,8 @@ function mainMessage(){
         }
         else{
             alert("Ocurrió un error al enviar el mensaje a: " + nameDes);
+            sessionStorage.setItem('idDes', '');
+            sessionStorage.setItem('nameDes', '');
             window.location.href = 'myMessagesPMoviles.html';
         }
         $('#loader').hide();
